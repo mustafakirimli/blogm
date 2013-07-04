@@ -41,6 +41,12 @@ LOCALE_PATHS = (
     os.path.join(PROJECT_ROOT, 'locale'),
     )
 
+# account settings
+AUTH_PROFILE_MODULE = 'account.UserProfile'
+AUTHENTICATION_BACKENDS = ('account.backends.EmailAuthBackend',)
+AUTH_USER_EMAIL_UNIQUE = True
+LOGIN_URL = '/account/login/'
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -146,6 +152,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'djcelery',
+    'blogm.account',
 )
 
 # A sample logging configuration. The only tangible logging
