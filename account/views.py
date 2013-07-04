@@ -1,10 +1,15 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.urlresolvers import reverse
+from account.models import EmailChange
 
-#@login_required
+@login_required
 def index(request):
-    return HttpResponse("Account Index!")
+    user = request.user
+    profile = user.get_profile()
+    email_change = EmailChange.objects.filter(user=request.user, is_active=True)[0] if EmailChange.objects.filter(user=request.user, is_active=True) else None
+    return render(request, 'account/index.html', {'user': user, 'profile': profile, 'change': email_change})
 
 #@user_passes_test(lambda u: u.is_anonymous())
 def register_user(request):

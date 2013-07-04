@@ -1,3 +1,19 @@
+#: account/models.py:10
+msgid "Profile Pic"
+msgstr ""
+
+#: account/models.py:12
+msgid "Male"
+msgstr ""
+
+#: account/models.py:13
+msgid "Female"
+msgstr ""
+
+#: post/models.py:11
+msgid "Post Image"
+msgstr ""
+
 #: template/blogmt1/404.html:5 template/blogmt1/404.html.py:14
 msgid "Page Not Found!"
 msgstr ""
@@ -30,6 +46,68 @@ msgstr ""
 msgid "View details"
 msgstr ""
 
+#: template/blogmt1/account/base.html:9
+msgid "Admin Menu"
+msgstr ""
+
+#: template/blogmt1/account/base.html:10
+msgid "Dashboard"
+msgstr ""
+
+#: template/blogmt1/account/base.html:11 template/blogmt1/base/page.html:49
+msgid "Update Profile"
+msgstr ""
+
+#: template/blogmt1/account/base.html:12 template/blogmt1/base/page.html:50
+msgid "Change Password"
+msgstr ""
+
+#: template/blogmt1/account/base.html:13 template/blogmt1/base/page.html:51
+msgid "Change Email"
+msgstr ""
+
+#: template/blogmt1/account/base.html:15
+msgid "My Posts"
+msgstr ""
+
+#: template/blogmt1/account/base.html:16 template/blogmt1/base/page.html:52
+msgid "Create Post"
+msgstr ""
+
+#: template/blogmt1/account/base.html:18 template/blogmt1/base/page.html:53
+msgid "Logout"
+msgstr ""
+
+#: template/blogmt1/account/index.html:7 template/blogmt1/base/page.html:44
+#: template/blogmt1/base/page.html.py:48
+msgid "My Account"
+msgstr ""
+
+#: template/blogmt1/account/index.html:25
+msgid "Firt Name"
+msgstr ""
+
+#: template/blogmt1/account/index.html:30
+msgid "Last Name"
+msgstr ""
+
+#: template/blogmt1/account/index.html:34
+msgid "Gender"
+msgstr ""
+
+#: template/blogmt1/account/index.html:38
+msgid "Email"
+msgstr ""
+
+#: template/blogmt1/account/index.html:45
+msgid "Warning"
+msgstr ""
+
+#: template/blogmt1/account/index.html:46
+#, python-format
+msgid "Email address activation request pending for %(change.email)s "
+msgstr ""
+
 #: template/blogmt1/base/page.html:5
 msgid "Welcolme To BlogM"
 msgstr ""
@@ -50,30 +128,6 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: template/blogmt1/base/page.html:44 template/blogmt1/base/page.html.py:48
-msgid "My Account"
-msgstr ""
-
-#: template/blogmt1/base/page.html:49
-msgid "Update Profile"
-msgstr ""
-
-#: template/blogmt1/base/page.html:50
-msgid "Change Password"
-msgstr ""
-
-#: template/blogmt1/base/page.html:51
-msgid "Change Email"
-msgstr ""
-
-#: template/blogmt1/base/page.html:52
-msgid "Create Post"
-msgstr ""
-
-#: template/blogmt1/base/page.html:53
-msgid "Logout"
-msgstr ""
-
 #: template/blogmt1/base/page.html:57
 msgid "Register"
 msgstr ""
@@ -81,6 +135,3 @@ msgstr ""
 #: template/blogmt1/base/page.html:58
 msgid "Login"
 msgstr ""
-
-#~ msgid "deneme"
-#~ msgstr "test"

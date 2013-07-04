@@ -1,0 +1,51 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+
+{% block page_content %}
+<fieldset>
+    <div id="legend">
+      <legend class="">{% trans "My Account" %}</legend>
+    </div>
+</fieldset>
+
+{% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %}">
+    <a class="close" data-dismiss="alert" href="#">×</a>{{ message }}
+  </div>
+  {% endfor %}
+{% endif %}
+
+<div id="details" class="span7"><div><p><img class="img-polaroid" src="{{ MEDIA_URL }}/media/{{ profile.image }}" width="160" height="160"></p>
+<h3>{{ user.first_name }} {{ user.last_name }}</h3>
+<h4>({{ user.username }})</h4>
+<br>
+        <table class="table table-striped">
+            <tbody><tr>
+                <td>{% trans "Firt Name" %}:</td>
+                <td>{{ user.first_name }}</td>
+            </tr>
+            
+            <tr>
+                <td>{% trans "Last Name" %}:</td>
+                <td>{{ user.last_name }}</td>
+            </tr>
+            <tr>
+                <td>{% trans "Gender" %}:</td>
+                <td>{{ profile.get_gender_display }}</td>
+            </tr>
+            <tr>
+                <td>{% trans "Email" %}:</td>
+                <td><i class="icon-envelope"></i> <a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+            </tr>
+        </tbody></table>
+
+        {% if change %}
+        <div class="alert alert-warning">
+          <h4 class="alert-heading">{% trans "Warning" %}</h4>
+          {% blocktrans %}Email address activation request pending for {{ change.email }} {% endblocktrans %}
+        </div>
+        {% endif %}
+</div></div>
+
+{% endblock %}
