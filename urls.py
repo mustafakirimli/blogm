@@ -22,6 +22,9 @@ urlpatterns = patterns('',
     # post app
     url(r'^post/', include('blogm.post.urls')),
 
+    # comment app
+    url(r'^comment/', include('blogm.comment.urls')),
+
     # account app
     url(r'^account/', include('blogm.account.urls')),
 
