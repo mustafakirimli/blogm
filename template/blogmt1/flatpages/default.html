@@ -1,1 +1,11 @@
-{{ flatpage.content }}
+{% extends "base/page.html" %}
+
+{% block content %}
+<!-- Jumbotron -->
+<div class="jumbotron">
+  <h1>{{ flatpage.title }}</h1>
+  <p class="lead">{{ flatpage.content }}</p>
+</div>
+
+<hr>
+{% endblock %}
