@@ -8,7 +8,7 @@
 <div class="jumbotron">
   <h1>{{main_post.name}}</h1>
   <p class="lead">{{main_post.description}}</p>
-  <a class="btn btn-large btn-success" href="/post/{{main_post.id}}/">{% trans "Read More" %}</a>
+  <a class="btn btn-large btn-success" href="{%url post_detail main_post.id%}">{% trans "Read More" %}</a>
 </div>
 
 <hr>
@@ -19,7 +19,7 @@
     <div class="span4">
       <h2>{{post.name}}</h2>
       <p>{{post.description}}</p>
-      <p><a class="btn" href="/post/{{post.id}}/">{% trans "View details" %} &raquo;</a></p>
+      <p><a class="btn" href="{%url post_detail post.id%}">{% trans "View details" %} &raquo;</a></p>
     </div>
   {% endfor %}
 </div>
