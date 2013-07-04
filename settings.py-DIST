@@ -153,6 +153,8 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'djcelery',
     'blogm.account',
+    'blogm.post',
+    'blogm.comment',
 )
 
 # A sample logging configuration. The only tangible logging
