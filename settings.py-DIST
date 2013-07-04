@@ -1,6 +1,7 @@
 # Django settings for blogm project.
 # -*- coding: UTF-8 -*-
 import os
+import djcelery
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -175,3 +176,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'name.lastname@markafoni.com'
 EMAIL_HOST_PASSWORD = 'password'
 EMAIL_PORT = 587
+
+# celery settings
+djcelery.setup_loader()
+BROKER_URL = 'amqp://guest:guest@localhost:5672/'
+CELERY_IMPORTS = ("tasks",)
