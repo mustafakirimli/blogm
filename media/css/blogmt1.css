@@ -79,3 +79,17 @@ body {
 .clear{
   clear: both;
 }
+
+.rcontent{
+  margin-left: 20px;
+  width: 728px;
+}
+
+#create_post #id_content{
+  width: 500px;
+  height: 280px;
+}
+
+#create_post #id_description, #create_post #id_title{
+  width: 500px;
+}
