@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
+from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -17,4 +18,9 @@ urlpatterns = patterns('',
 
     # django filatpages
     url(r'^pages/', include('django.contrib.flatpages.urls'), name='pages'),
+
+    # media requests
+    url(r'^media/(?P<path>.*)$',
+         "django.views.static.serve",
+         dict(document_root = settings.MEDIA_ROOT, show_indexes = True)),
 )
