@@ -1,0 +1,83 @@
+#: template/blogmt1/404.html:5 template/blogmt1/404.html.py:14
+msgid "Page Not Found!"
+msgstr ""
+
+#: template/blogmt1/404.html:14
+msgid "Error 404"
+msgstr ""
+
+#: template/blogmt1/404.html:18 template/blogmt1/500.html:18
+msgid "Take Me Home"
+msgstr ""
+
+#: template/blogmt1/500.html:5
+msgid "50mething Get Wr0ng!"
+msgstr ""
+
+#: template/blogmt1/500.html:14
+msgid "Something Get Wrong!"
+msgstr ""
+
+#: template/blogmt1/500.html:14
+msgid "Error 500"
+msgstr ""
+
+#: template/blogmt1/home.html:11
+msgid "Read More"
+msgstr ""
+
+#: template/blogmt1/home.html:22
+msgid "View details"
+msgstr ""
+
+#: template/blogmt1/base/page.html:5
+msgid "Welcolme To BlogM"
+msgstr ""
+
+#: template/blogmt1/base/page.html:37
+msgid "Home"
+msgstr ""
+
+#: template/blogmt1/base/page.html:38
+msgid "All Posts"
+msgstr ""
+
+#: template/blogmt1/base/page.html:39
+msgid "Most Popular"
+msgstr ""
+
+#: template/blogmt1/base/page.html:40
+msgid "About"
+msgstr ""
+
+#: template/blogmt1/base/page.html:44 template/blogmt1/base/page.html.py:48
+msgid "My Account"
+msgstr ""
+
+#: template/blogmt1/base/page.html:49
+msgid "Update Profile"
+msgstr ""
+
+#: template/blogmt1/base/page.html:50
+msgid "Change Password"
+msgstr ""
+
+#: template/blogmt1/base/page.html:51
+msgid "Change Email"
+msgstr ""
+
+#: template/blogmt1/base/page.html:52
+msgid "Create Post"
+msgstr ""
+
+#: template/blogmt1/base/page.html:53
+msgid "Logout"
+msgstr ""
+
+#: template/blogmt1/base/page.html:57
+msgid "Register"
+msgstr ""
+
+#: template/blogmt1/base/page.html:58
+msgid "Login"
+msgstr ""

@@ -6,3 +6,9 @@ python manage.py syncdb
 # initial data create
 python manage.py dumpdata flatpages auth.User --indent 4 > initial_data.json
 
+# make locale messages
+django-admin.py makemessages --all
+
+# compile locale messages
+django-admin.py compilemessages
+
