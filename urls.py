@@ -16,5 +16,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     # django filatpages
-    url(r'^pages/', include('django.contrib.flatpages.urls')),
+    url(r'^pages/', include('django.contrib.flatpages.urls'), name='pages'),
 )
