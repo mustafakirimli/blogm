@@ -1,1 +1,8 @@
 BLOGM
+
+# create database
+python manage.py syncdb
+
+# initial data create
+python manage.py dumpdata flatpages auth.User --indent 4 > initial_data.json
+
