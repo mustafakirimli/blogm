@@ -19,6 +19,9 @@ urlpatterns = patterns('',
     # django filatpages
     url(r'^pages/', include('django.contrib.flatpages.urls'), name='pages'),
 
+    # post app
+    url(r'^post/', include('blogm.post.urls')),
+
     # media requests
     url(r'^media/(?P<path>.*)$',
          "django.views.static.serve",
