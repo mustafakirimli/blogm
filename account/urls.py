@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, url
 
 urlpatterns = patterns("",
-    url(r'^$', 'account.views.index', name='acoount_home'),
+    url(r'^$', 'account.views.index', name='account_home'),
     url(r'^index/$', 'account.views.index', name='account_home_index'),
     url(r'^register/$', 'account.views.register_user', name='register'),
     url(r'^login/$', 'account.views.login_user', name='login'),

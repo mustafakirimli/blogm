@@ -45,7 +45,7 @@
                     <b class="caret"></b>
                  </a>
                  <ul class="dropdown-menu">
-                    <li><a href="">{% trans "My Account" %}</a></li>
+                    <li><a href="{% url account_home %}">{% trans "My Account" %}</a></li>
                     <li style="display:table-row;"><a href="{% url update_profile %}">{% trans "Update Profile" %}</a></li>
                     <li style="display:table-row;"><a href="{% url change_password %}">{% trans "Change Password" %}</a></li>
                     <li style="display:table-row;"><a href="{% url change_email %}">{% trans "Change Email" %}</a></li>
