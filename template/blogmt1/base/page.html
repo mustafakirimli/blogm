@@ -37,7 +37,7 @@
                 <li class="active"><a href="{% url home %}">{% trans "Home" %}</a></li>
                 <li><a href="#">{% trans "All Posts" %}</a></li>
                 <li><a href="#">{% trans "Most Popular" %}</a></li>
-                <li><a href="">{% trans "About" %}</a></li>
+                <li><a href="{% url django.contrib.flatpages.views.flatpage url="about/" %}">{% trans "About" %}</a></li>
                 {% if user.is_authenticated %}
                 <li class="dropdown" id="menu1">
                  <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
@@ -46,16 +46,16 @@
                  </a>
                  <ul class="dropdown-menu">
                     <li><a href="">{% trans "My Account" %}</a></li>
-                    <li style="display:table-row;"><a href="">{% trans "Update Profile" %}</a></li>
-                    <li style="display:table-row;"><a href="">{% trans "Change Password" %}</a></li>
-                    <li style="display:table-row;"><a href="">{% trans "Change Email" %}</a></li>
+                    <li style="display:table-row;"><a href="{% url update_profile %}">{% trans "Update Profile" %}</a></li>
+                    <li style="display:table-row;"><a href="{% url change_password %}">{% trans "Change Password" %}</a></li>
+                    <li style="display:table-row;"><a href="{% url change_email %}">{% trans "Change Email" %}</a></li>
                     <li style="display:table-row;"><a href="">{% trans "Create Post" %}</a></li>
-                    <li style="display:table-row;"><a href="">{% trans "Logout" %}</a></li>
+                    <li style="display:table-row;"><a href="{% url logout %}">{% trans "Logout" %}</a></li>
                  </ul>
                 </li>
                 {% else %}
-                  <li><a href="">{% trans "Register" %}</a></li>
-                  <li><a href="">{% trans "Login" %}</a></li>
+                  <li><a href="{% url register %}">{% trans "Register" %}</a></li>
+                  <li><a href="{% url login %}">{% trans "Login" %}</a></li>
                 {% endif %}
               </ul>
             </div>

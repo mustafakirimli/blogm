@@ -22,6 +22,9 @@ urlpatterns = patterns('',
     # post app
     url(r'^post/', include('blogm.post.urls')),
 
+    # account app
+    url(r'^account/', include('blogm.account.urls')),
+
     # media requests
     url(r'^media/(?P<path>.*)$',
          "django.views.static.serve",
