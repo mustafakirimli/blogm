@@ -1,0 +1,14 @@
+{% extends "email/base.html" %}
+{% load i18n %}
+
+{% block content %}
+{% blocktrans %}
+Hi,
+
+Thank you for registration,
+please enable your account with below link:
+{% endblocktrans %}
+
+<a href="http://{{ site.domain }}{% url activate_account profile.activation_key %}">{% trans "Enable Account"%}</a>
+
+{% endblock %}

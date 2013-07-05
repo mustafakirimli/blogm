@@ -1,13 +1,41 @@
-#: account/models.py:10
+#: account/forms.py:11
+msgid "E-mail"
+msgstr ""
+
+#: account/forms.py:12
+msgid "Password"
+msgstr ""
+
+#: account/forms.py:14
+msgid "Password (Confirm)"
+msgstr ""
+
+#: account/views.py:26
+msgid "Thanks for registering. Please check your email box for activation."
+msgstr ""
+
+#: account/views.py:44
+msgid "Account activated."
+msgstr ""
+
+#: account/views.py:46
+msgid "Account activation problem!"
+msgstr ""
+
+#: account/models/userprofile.py:15
 msgid "Profile Pic"
 msgstr ""
 
-#: account/models.py:12
+#: account/models/userprofile.py:17
 msgid "Male"
 msgstr ""
 
-#: account/models.py:13
+#: account/models/userprofile.py:18
 msgid "Female"
+msgstr ""
+
+#: account/models/userprofile.py:35
+msgid "Thanks for signing up!"
 msgstr ""
 
 #: post/models.py:11
@@ -134,4 +162,17 @@ msgstr ""
 
 #: template/blogmt1/base/page.html:58
 msgid "Login"
+msgstr ""
+
+#: template/blogmt1/email/account/activate.html:5
+msgid ""
+"\n"
+"Hi,\n"
+"\n"
+"Thank you for registration,\n"
+"please enable your account with below link:\n"
+msgstr ""
+
+#: template/blogmt1/email/account/activate.html:12
+msgid "Enable Account"
 msgstr ""

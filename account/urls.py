@@ -9,6 +9,7 @@ urlpatterns = patterns("",
     url(r'^change-password/$', 'account.views.change_password', name='change_password'),
     url(r'^change-email/$', 'account.views.change_email', name='change_email'),
     url(r'^activate-email/$', 'account.views.activate_email', name='activate_email'),
+    url(r'^activate-account/(?P<activation_key>.+)/$', 'account.views.activate_account', name='activate_account'),
     url(r'^my-posts/$', 'account.views.my_posts', name='my_posts'),
     url(r'^logout/$', 'account.views.logout_user', name='logout')
 )
