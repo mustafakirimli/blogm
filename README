@@ -4,7 +4,7 @@ BLOGM
 python manage.py syncdb
 
 # initial data create
-python manage.py dumpdata flatpages post auth.User --indent 4 > initial_data.json
+python manage.py dumpdata flatpages post auth.User sites.Site --indent 4 > initial_data.json
 
 # make locale messages
 django-admin.py makemessages --all
@@ -12,3 +12,5 @@ django-admin.py makemessages --all
 # compile locale messages
 django-admin.py compilemessages
 
+# celert worker start
+python manage.py celery worker --loglevel=info
