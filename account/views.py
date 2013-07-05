@@ -1,13 +1,10 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.urlresolvers import reverse
-from account.models import EmailChange
-from django.shortcuts import get_object_or_404
-from account.models import UserProfile
+from account.models import UserProfile, EmailChange 
 from django.contrib import messages
 from django.utils.translation import ugettext as _
-from django.http import HttpResponseRedirect
 from account.forms import RegisterForm
 
 @login_required
