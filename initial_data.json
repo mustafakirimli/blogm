@@ -127,5 +127,13 @@
             "email": "mustafa.kirimli@markafoni.com",
             "date_joined": "2013-07-04 03:41:24"
         }
+    },
+   {
+        "pk": 1,
+        "model": "sites.site",
+        "fields": {
+            "domain": "127.0.0.1:8000",
+            "name": "blogm"
+        }
     }
 ]
