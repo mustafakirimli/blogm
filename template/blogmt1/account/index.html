@@ -43,7 +43,7 @@
         {% if change %}
         <div class="alert alert-warning">
           <h4 class="alert-heading">{% trans "Warning" %}</h4>
-          {% blocktrans %}Email address activation request pending for {{ change.email }} {% endblocktrans %}
+          {% blocktrans with email=change.email %}Email address activation request pending for {{ email }} {% endblocktrans %}
         </div>
         {% endif %}
 </div></div>

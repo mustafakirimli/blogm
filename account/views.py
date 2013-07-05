@@ -11,7 +11,7 @@ from account.forms import RegisterForm
 def index(request):
     user = request.user
     profile = user.get_profile()
-    email_change = EmailChange.objects.filter(user=request.user, is_active=True)[0] if EmailChange.objects.filter(user=request.user, is_active=True) else None
+    email_change = EmailChange.pending_requests(user)
     return render(request, 'account/index.html', {'user': user, 'profile': profile, 'change': email_change})
 
 @user_passes_test(lambda u: u.is_anonymous())

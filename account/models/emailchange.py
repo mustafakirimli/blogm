@@ -8,5 +8,10 @@ class EmailChange(models.Model):
     is_active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    @staticmethod
+    def pending_requests(user):
+        change = EmailChange.objects.filter(user=user, is_active=True)
+        return change[0] if change else False
+
     class Meta:
         app_label = 'account'
