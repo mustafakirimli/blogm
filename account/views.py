@@ -3,10 +3,10 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import logout, login, authenticate
 from django.core.urlresolvers import reverse
-from account.models import UserProfile, EmailChange 
+from account.models import UserProfile, EmailChange
 from django.contrib import messages
 from django.utils.translation import ugettext as _
-from account.forms import RegisterForm, LoginForm
+from account.forms import RegisterForm, LoginForm, ProfileForm, UserForm, PasswordForm
 
 @login_required
 def index(request):
@@ -65,13 +65,35 @@ def login_user(request):
         'form': form,
     })
 
-#@login_required
+@login_required
 def update_profile(request):
-    return HttpResponse("Update Profile!")
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=request.user.get_profile())
+        if form.is_valid():
+            form.save()
+            messages.success(request, _("Profile informations updated succesfully."))
+            return HttpResponseRedirect(reverse('update_profile'))
+    else:
+        form = ProfileForm(instance=request.user.get_profile())
+       
+    return render(request, 'account/profile.html', {
+        'form': form,
+    })
 
-#@login_required
+@login_required
 def change_password(request):
-    return HttpResponse("Change Password!")
+    if request.method == 'POST':
+        form = PasswordForm(request.POST,instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, _("Password informations updated succesfully."))
+            return HttpResponseRedirect(reverse('change_password'))
+    else:
+        form = PasswordForm(instance=request.user)
+
+    return render(request, 'account/password.html', {
+        'form': form,
+    })
 
 #@login_required
 def forgot_password(request):

@@ -47,3 +47,65 @@ class LoginForm(forms.Form):
 
     password = forms.CharField(label=_("Password"),
                                 widget=forms.PasswordInput)
+
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name')
+        
+class ProfileForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        # magic 
+        self.user = kwargs['instance'].user
+        user_kwargs = kwargs.copy()
+        user_kwargs['instance'] = self.user
+        self.uf = UserForm(*args, **user_kwargs)
+        # magic end 
+
+        super(ProfileForm, self).__init__(*args, **kwargs)
+
+        self.fields.update(self.uf.fields)
+        self.initial.update(self.uf.initial)
+         
+        # define fields order if needed
+        self.fields.keyOrder = (
+            'first_name',
+            'last_name',
+        
+            'gender',
+            'image',
+        )
+
+    def save(self, *args, **kwargs):
+        # save both forms   
+        self.uf.save(*args, **kwargs)
+        return super(ProfileForm, self).save(*args, **kwargs)
+
+    class Meta:
+        model = UserProfile
+        fields = ('image', 'gender')
+
+class PasswordForm(forms.ModelForm):
+    oldpassword = forms.CharField(widget=PasswordInput(),label=_('Current Password'))
+    password1 = forms.CharField(widget=PasswordInput(),label=_('New Password'))
+    password2 = forms.CharField(widget=PasswordInput(),label=_('New Password (again)'))
+
+    def clean_oldpassword(self):
+        if self.cleaned_data.get("oldpassword") and not self.instance.check_password(self.cleaned_data["oldpassword"]):
+            raise forms.ValidationError(_("Please type your current password."))
+        return self.cleaned_data["oldpassword"]
+
+    def clean_password2(self):
+        if self.cleaned_data.get('password1') and self.cleaned_data.get('password2') and self.cleaned_data['password1'] != self.cleaned_data['password2']:
+            raise forms.ValidationError(_('The new passwords are not the same'))
+        return self.cleaned_data['password2']
+
+    def save(self):
+        self.instance.set_password(self.cleaned_data["password2"])
+        self.instance.save()
+        return self.instance
+
+    class Meta:
+        model = User
+        fields = ('oldpassword','password1','password2')
