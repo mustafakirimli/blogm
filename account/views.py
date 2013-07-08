@@ -1,11 +1,12 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth import logout, login, authenticate
 from django.core.urlresolvers import reverse
 from account.models import UserProfile, EmailChange 
 from django.contrib import messages
 from django.utils.translation import ugettext as _
-from account.forms import RegisterForm
+from account.forms import RegisterForm, LoginForm
 
 @login_required
 def index(request):
@@ -44,9 +45,25 @@ def activate_account(request, activation_key):
 
     return HttpResponseRedirect(reverse("account_home"))
 
-#@user_passes_test(lambda u: u.is_anonymous(), reverse('account_home'))
+@user_passes_test(lambda u: u.is_anonymous(), login_url="/account/")
 def login_user(request):
-    return HttpResponse("Login!")
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect(reverse('home'))
+            else:
+                messages.error(request, _("Invalid email/password"))
+    else:
+        form = LoginForm()
+       
+    return render(request, 'account/login.html', {
+        'form': form,
+    })
 
 #@login_required
 def update_profile(request):
@@ -55,6 +72,10 @@ def update_profile(request):
 #@login_required
 def change_password(request):
     return HttpResponse("Change Password!")
+
+#@login_required
+def forgot_password(request):
+    return HttpResponse("Forgot Password!")
 
 #@login_required
 def change_email(request):
@@ -68,6 +89,7 @@ def activate_email(request):
 def my_posts(request):
     return HttpResponse("My Posts!")
 
-#@login_required
+@login_required
 def logout_user(request):
-    return HttpResponse("Logout!")
+    logout(request)
+    return HttpResponseRedirect(reverse('home'))

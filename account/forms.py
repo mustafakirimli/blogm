@@ -37,3 +37,13 @@ class RegisterForm(forms.Form):
         p.is_approved = False
         p.save()
         return user
+
+
+class LoginForm(forms.Form):
+    username = forms.RegexField(regex=r'^[\w.@+-]+$',
+                                max_length=30,
+                                label=_("Username"),
+                                error_messages={'invalid': _("Username can contain any letters or numbers, without spaces")})
+
+    password = forms.CharField(label=_("Password"),
+                                widget=forms.PasswordInput)
