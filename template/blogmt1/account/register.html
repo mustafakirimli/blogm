@@ -1,9 +1,11 @@
 {% extends "base/page.html" %}
+{% load i18n %}
+
 {% block content %}
 <form class="form-horizontal" action="{% url register %}" method="post">
     <fieldset>
     <div id="legend">
-      <legend class="">Register</legend>
+      <legend class="">{% trans "Register" %}</legend>
     </div>
     {# Include the hidden fields in the form #}
     {% for hidden in form.hidden_fields %}
@@ -35,7 +37,7 @@
     <div class="control-group">
       <!-- Button -->
       <div class="controls">
-        <button class="btn btn-primary">Register</button>
+        <button class="btn btn-primary">{% trans "Register" %}</button>
       </div>
     </div>
   </fieldset>
