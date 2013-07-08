@@ -1,20 +1,14 @@
 {% extends "account/base.html" %}
 {% load i18n %}
 
-{% block page_content %}
+{% block content %}
 <fieldset>
     <div id="legend">
       <legend class="">{% trans "My Account" %}</legend>
     </div>
 </fieldset>
 
-{% if messages %}
-  {% for message in messages %}
-  <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %}">
-    <a class="close" data-dismiss="alert" href="#">×</a>{{ message }}
-  </div>
-  {% endfor %}
-{% endif %}
+{% include "block/messages.html" %}
 
 <div id="details" class="span7"><div><p><img class="img-polaroid" src="{{ MEDIA_URL }}/media/{{ profile.image }}" width="160" height="160"></p>
 <h3>{{ user.first_name }} {{ user.last_name }}</h3>

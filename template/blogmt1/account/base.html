@@ -1,30 +1,20 @@
 {% extends "base/page.html" %}
 {% load i18n %}
 
-{% block content %}
-    <div class="sidebar-nav">
-      <!-- Left Nav Start //-->
-      <div class="well" style="width:250px; padding: 10px 0; float:left; margin-top:40px">
-        <ul class="nav nav-list"> 
-          <li class="nav-header">{% trans "Admin Menu" %}</li>        
-          <li><a href="{% url account_home %}"><i class="icon-home"></i> {% trans "Dashboard" %}</a></li>
-          <li><a href="{% url update_profile %}"><i class="icon-user"></i> {% trans "Update Profile" %}</a></li>
-          <li><a href="{% url change_password %}"><i class="icon-lock"></i> {% trans "Change Password" %}</a></li>
-          <li><a href="{% url change_email %}"><i class="icon-envelope"></i> {% trans "Change Email" %}</a></li>
-          <li class="divider"></li>
-          <li><a href="{% url my_posts %}"><i class="icon-book"></i> {% trans "My Posts" %}</a></li>
-          <li><a href=""><i class="icon-file"></i> {% trans "Create Post" %}</a></li>
-          <li class="divider"></li>
-          <li><a href="{% url logout %}"><i class="icon-off"></i> {% trans "Logout" %}</a></li>
-        </ul>
-      </div>
-      <!-- Left Nav End //-->
-      <!-- Page Content Start //-->
-      <div class="rcontent" style="float:left;">
-        {% block page_content %}{% endblock %}
-      </div>
-      <!-- Page Content End //-->
-    </div>
+{% block content_before %}
+<div class="sidebar-nav">
+  <!-- Left Nav Start //-->
+  <div class="well" style="width:250px; padding: 10px 0; float:left; margin-top:40px">
+    {% include 'block/navigation.html' %}
+  </div>
+  <!-- Left Nav End //-->
+  <!-- Page Content Start //-->
+  <div class="rcontent" style="float:left;">
+{% endblock %}
 
-<hr class="clear">
+{% block content_after %}
+  </div>
+  <!-- Page Content End //-->
+</div>
+<hr class="clear"/>
 {% endblock %}

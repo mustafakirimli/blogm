@@ -64,7 +64,9 @@
       </div>
       {% endblock %}
 
+      {% block content_before %}{% endblock %}
       {% block content %}{% endblock %}
+      {% block content_after %}{% endblock %}
 
       {% block footer %}
       <div class="footer">
