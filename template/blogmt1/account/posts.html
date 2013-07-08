@@ -1,0 +1,40 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<fieldset>
+    <div id="legend">
+      <legend class="">{% trans "My Posts" %}</legend>
+    </div>
+</fieldset>
+
+{% include "block/messages.html" %}
+
+{% if posts %}
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>{% trans "Post Name" %}</th>
+      <th>{% trans "Post Title" %}</th>
+      <th>{% trans "Created At" %}</th>
+      <th>{% trans "Post Status" %}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for post in posts %}
+    <tr>
+      <td><a href="{% url edit_post post.id %}">{{ post.id }}</a></td>
+      <td>{{ post.name }}</td>
+      <td>{{ post.title }}</td>
+      <td>{{ post.created_at|date:'Y-m-d H:i' }}</td>
+      <td class="{{ post.is_approved }}">{{ post.is_approved }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="label">{% trans "No entry found!" %}</p>
+{% endif %}
+
+{% endblock %}

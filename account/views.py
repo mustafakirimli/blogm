@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import logout, login, authenticate
 from django.core.urlresolvers import reverse
 from account.models import UserProfile, EmailChange
+from post.models import Post
 from django.contrib import messages
 from django.utils.translation import ugettext as _
 from account.forms import RegisterForm, LoginForm, ProfileForm, UserForm, PasswordForm, EmailForm
@@ -132,9 +133,10 @@ def activate_email(request, activation_key):
     messages.success(request, _("Email address activated"))
     return HttpResponseRedirect(reverse('account_home'))
 
-#@login_required
+@login_required
 def my_posts(request):
-    return HttpResponse("My Posts!")
+    posts = Post.objects.filter(user=request.user)
+    return render(request, 'account/posts.html', {'posts': posts})
 
 @login_required
 def logout_user(request):
