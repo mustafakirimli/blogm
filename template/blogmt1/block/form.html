@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<form class="form-horizontal" action="{{ action }}" method="post">
+<form class="form-horizontal" action="{{ action }}" method="post" {%if form.is_multipart%}enctype="multipart/form-data"{% endif %}>
     <fieldset>
     <div id="legend">
       <legend class="">{% trans legend %}</legend>
