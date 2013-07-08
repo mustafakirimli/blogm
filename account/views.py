@@ -6,7 +6,8 @@ from django.core.urlresolvers import reverse
 from account.models import UserProfile, EmailChange
 from django.contrib import messages
 from django.utils.translation import ugettext as _
-from account.forms import RegisterForm, LoginForm, ProfileForm, UserForm, PasswordForm
+from account.forms import RegisterForm, LoginForm, ProfileForm, UserForm, PasswordForm, EmailForm
+import string, random
 
 @login_required
 def index(request):
@@ -99,13 +100,37 @@ def change_password(request):
 def forgot_password(request):
     return HttpResponse("Forgot Password!")
 
-#@login_required
+@login_required
 def change_email(request):
-    return HttpResponse("Change Email!")
+    email_change = EmailChange.pending_requests(request.user) if not request.GET.get("success") else None
+    if request.method == 'POST':
+        form = EmailForm(request.POST,instance=request.user)
+        if form.is_valid():
+            form.save()
 
-#@login_required
-def activate_email(request):
-    return HttpResponse("Activate Email!")
+            activation_key = ''.join([random.choice(string.digits + string.letters) for i in range(12)])
+            EmailChange.objects.filter(user=request.user).update(is_active=False)
+            emailChange = EmailChange.objects.create(user=request.user, email=request.POST.get("email"), is_active=True, activation_key=activation_key)
+            emailChange.send_activation_email.delay(emailChange)
+            messages.success(request, _("Email informations updated succesfully."))
+            redirect_url = "%s%s" %(reverse('change_email'), "?success=true")
+            return HttpResponseRedirect(redirect_url)
+    else:
+        form = EmailForm(instance=request.user)
+
+    return render(request, 'account/email.html', {
+        'form': form, 'change': email_change
+    })
+
+@login_required
+def activate_email(request, activation_key):
+    change = EmailChange.objects.get(user=request.user, is_active=True, activation_key=activation_key)
+    request.user.email = change.email
+    request.user.save()
+    change.is_active = False
+    change.save()
+    messages.success(request, _("Email address activated"))
+    return HttpResponseRedirect(reverse('account_home'))
 
 #@login_required
 def my_posts(request):

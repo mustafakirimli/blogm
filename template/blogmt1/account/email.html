@@ -1,0 +1,15 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+
+{% block content %}
+    {% if change %}
+    <div class="alert alert-warning">
+        <h4 class="alert-heading">{% trans "Warning" %}</h4>
+        {% blocktrans with email=change.email %}Email address activation request pending for {{ email }} {% endblocktrans %}
+    </div>
+    {% endif %}
+
+    {% url change_email as action%}
+    {% include "block/form.html" with action=action legend="Change Email" submit="Update Email" %}
+    <hr>
+{% endblock %}

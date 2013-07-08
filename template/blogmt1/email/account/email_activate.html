@@ -1,0 +1,13 @@
+{% extends "email/base.html" %}
+{% load i18n %}
+
+{% block content %}
+{% blocktrans %}
+Hi,
+
+Please enable your new email address with below link:
+{% endblocktrans %}
+
+<a href="http://{{ site.domain }}{% url activate_email change.activation_key %}">{% trans "Activate Email"%}</a>
+
+{% endblock %}

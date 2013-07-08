@@ -41,7 +41,7 @@ class RegisterForm(forms.Form):
 
 class LoginForm(forms.Form):
     username = forms.RegexField(regex=r'^[\w.@+-]+$',
-                                max_length=30,
+                                max_length=100,
                                 label=_("Username"),
                                 error_messages={'invalid': _("Username can contain any letters or numbers, without spaces")})
 
@@ -109,3 +109,26 @@ class PasswordForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('oldpassword','password1','password2')
+
+
+class EmailForm(forms.ModelForm):
+    password = forms.CharField(widget=PasswordInput(),label=_('Current Password'))
+
+    def clean_email(self):
+        if self.cleaned_data.get("email") and User.objects.filter(email=self.cleaned_data["email"]):
+            raise forms.ValidationError(_("Email address already using by another user!"))
+        elif self.cleaned_data.get("email") and EmailChange.objects.filter(email=self.cleaned_data["email"]):
+            raise forms.ValidationError(_("Email address already using by another user!"))
+        return self.cleaned_data["email"]
+
+    def clean_password(self):
+        if self.cleaned_data.get("password") and not self.instance.check_password(self.cleaned_data["password"]):
+            raise forms.ValidationError(_("Please type your current password"))
+        return self.cleaned_data["password"]
+
+    def save(self):
+        return self.instance
+
+    class Meta:
+        model = User
+        fields = ('email','password')
