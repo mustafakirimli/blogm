@@ -8,7 +8,7 @@
     <li><a href="{% url change_email %}"><i class="icon-envelope"></i> {% trans "Change Email" %}</a></li>
     <li class="divider"></li>
     <li><a href="{% url my_posts %}"><i class="icon-book"></i> {% trans "My Posts" %}</a></li>
-    <li><a href=""><i class="icon-file"></i> {% trans "Create Post" %}</a></li>
+    <li><a href="{% url create_post %}"><i class="icon-file"></i> {% trans "Create Post" %}</a></li>
     <li class="divider"></li>
     <li><a href="{% url logout %}"><i class="icon-off"></i> {% trans "Logout" %}</a></li>
 </ul>

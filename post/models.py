@@ -1,6 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
+from celery import task
+import PIL
+from PIL import Image
+import settings
 
 class Post(models.Model):
     user = models.ForeignKey(User)
@@ -25,6 +29,25 @@ class Post(models.Model):
 
     def isVisible(self):
         return self.is_active == True and self.is_approved == True
+
+    @task
+    def resize_post_image(self):
+        image_path = "%s/%s" %(settings.MEDIA_ROOT, self.image)
+
+        basewidth = 300
+        image = Image.open(image_path)
+        # ImageOps compatible mode
+        if image.mode not in ("L", "RGB"):
+            image = image.convert("RGB")
+
+        wpercent = (basewidth/float(image.size[0]))
+        hsize = int((float(image.size[1])*float(wpercent)))
+        image = image.resize((basewidth,hsize), PIL.Image.ANTIALIAS)
+        image.save(image_path)
+        return True
+
+    class Meta:
+        app_label = 'post'
 
     def __unicode__(self):
         return self.name
