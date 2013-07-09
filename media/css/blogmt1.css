@@ -101,3 +101,22 @@ body {
   border: 1px solid #aaa;
   margin: 5px 20px 20px 0px;
 }
+
+.comments .comment .avatar{
+  float: left;
+  width: 94px;
+} 
+
+.comments .comment{
+  clear: both;
+  float: left;
+  width: 100%;
+  margin: 5px;
+  padding: 5px;
+  border: 1px silver solid;
+}
+
+.comments .comment .content{
+  margin-left: 110px;
+  font-size: 1.2em;
+}

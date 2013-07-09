@@ -1,5 +1,6 @@
 {% extends "base/page.html" %}
 {% load i18n %}
+{% load app_tags %}
 
 {% block content %}
   <div class="post">
@@ -12,6 +13,29 @@
       <p class="">{% autoescape off %}{{post.content}}{% endautoescape %}</p>  
   </div>
   <hr/>
+  
+  
+  <div class="comments">
+  {% if comments %}
+  <h4>5 Comment</h4>
+  <br/>
+  {% endif %}
+  {% for comment in comments %}
+    <div class="comment">
+      <div class="avatar">
+        <img src="http://www.gravatar.com/avatar/{{ comment.email|md5 }}" />
+      </div>
+      <div class="content">
+        <p><span><b>{{ comment.fullname }}</b></span>
+        <br/>
+        <span><small>{{ comment.created_at|date:'Y-m-d H:i' }}</small></span>
+        </p>
+        <p>{{ comment.content }}</p>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+
   {% url add_comment as action%}
   {% include "block/form.html" with action=action legend="Write Comment" submit="Send Comment" %}
   <hr>
