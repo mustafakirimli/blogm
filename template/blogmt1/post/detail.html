@@ -14,10 +14,10 @@
   </div>
   <hr/>
   
-  
+
   <div class="comments">
   {% if comments %}
-  <h4>5 Comment</h4>
+  <h4><i class="icon-comment"></i>  {{ comments.count }} Comment</h4>
   <br/>
   {% endif %}
   {% for comment in comments %}
