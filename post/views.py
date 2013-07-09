@@ -6,6 +6,10 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
+from django.shortcuts import get_object_or_404
+from django.contrib.contenttypes.models import ContentType
+from comment.forms import CommentForm
+from post.models import Post
 
 def index(request):
     return HttpResponse("Blog Posts!")
@@ -32,4 +36,7 @@ def edit_post(request, post_id):
     return HttpResponse("Edit Post!")
 
 def detail(request, post_id):
-    return HttpResponse("Post Detail!")
+    post = get_object_or_404(Post, pk=post_id)
+    post_type = ContentType.objects.get(app_label="post", model="post")
+    form = CommentForm(initial={"parent_id":post_id, "comment_type":post_type.id})
+    return render(request, 'post/detail.html', {'post': post, 'form': form})
