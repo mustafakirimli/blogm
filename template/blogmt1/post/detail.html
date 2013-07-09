@@ -4,14 +4,17 @@
 
 {% block content %}
   <!-- Jumbotron -->
-  <div class="jumbotron">
-    <h1>{{post.name}}</h1>
-    {% if post.image %}
-    <img src="{{ MEDIA_URL }}{{post.image}}" width="300" heigth=""/>
-    {% endif %}
-    <p class="lead">{% autoescape off %}{{post.content}}{% endautoescape %}</p>  
+  <div class="post">
+      <h1 class="text-center">{{post.name}}</h1>
+      <p class="text-right post-date">03 Mar 2013</p>
+      <br/>
+      {% if post.image %}
+      <img class="pimg" src="{{ MEDIA_URL }}{{post.image}}" width="200" heigth=""/>
+      {% endif %}
+      <p class="">{% autoescape off %}{{post.content}}{% endautoescape %}</p>  
   </div>
+  <hr/>
   {% url add_comment as action%}
-  {% include "block/form.html" with action=action legend=" " submit="Send Comment" %}
+  {% include "block/form.html" with action=action legend="Write Comment" submit="Send Comment" %}
   <hr>
 {% endblock %}

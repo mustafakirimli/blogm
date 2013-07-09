@@ -34,7 +34,7 @@ class Post(models.Model):
     def resize_post_image(self):
         image_path = "%s/%s" %(settings.MEDIA_ROOT, self.image)
 
-        basewidth = 300
+        basewidth = 200
         image = Image.open(image_path)
         # ImageOps compatible mode
         if image.mode not in ("L", "RGB"):

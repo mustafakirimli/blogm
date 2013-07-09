@@ -93,3 +93,11 @@ body {
 #create_post #id_description, #create_post #id_title{
   width: 500px;
 }
+
+.pimg{
+  float: left;
+  padding: 4px;
+  background: #fff;
+  border: 1px solid #aaa;
+  margin: 5px 20px 20px 0px;
+}
