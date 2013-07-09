@@ -120,3 +120,7 @@ body {
   margin-left: 110px;
   font-size: 1.2em;
 }
+
+.comments .comment .content p{
+  margin-top: 3px;
+}
