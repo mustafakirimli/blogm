@@ -1,0 +1,9 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+
+{% block content %}
+  {% url edit_post as action%}
+  {% include "block/form.html" with action=action legend="Edit Post" submit="Update Post" %}
+  <hr>  
+{% endblock %}
+

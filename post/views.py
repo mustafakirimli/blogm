@@ -33,7 +33,23 @@ def create_post(request):
     })
 
 def edit_post(request, post_id):
-    return HttpResponse("Edit Post!")
+    post = get_object_or_404(Post, pk=post_id)
+    print post.name
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+            post.resize_post_image.delay(post)
+            messages.success(request, _("Post updated succesfully."))
+            return HttpResponseRedirect(reverse("my_posts"))
+    else:
+        form = PostForm(instance=post)
+
+    return render(request, 'post/edit_post.html', {
+        'form': form,
+    })
 
 def detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
