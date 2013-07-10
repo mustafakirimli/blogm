@@ -18,7 +18,7 @@ class Post(models.Model):
     description = models.CharField(max_length=255)
     image = models.ImageField(_("Post Image"), upload_to="upload/post/", blank=True, null=True)
     activation_key =  models.CharField(max_length=30, null=True, blank=True)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_approved = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True,blank=True)
