@@ -11,6 +11,7 @@ from django.contrib.contenttypes.models import ContentType
 from comment.forms import CommentForm
 from post.models import Post
 from comment.models import Comment
+from django.contrib.auth.models import User
 
 def index(request):
     return HttpResponse("Blog Posts!")
@@ -22,8 +23,10 @@ def create_post(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.user = request.user
+            post.activation_key = User.objects.make_random_password()
             post.save()
             post.resize_post_image.delay(post)
+            post.notify_admin.delay(post)
             messages.success(request, _("Post created succesfully."))
             return HttpResponseRedirect(reverse("my_posts"))
     else:
@@ -58,3 +61,16 @@ def detail(request, post_id):
     post_type = ContentType.objects.get(app_label="post", model="post")
     form = CommentForm(initial={"parent_id":post_id, "comment_type":post_type.id})
     return render(request, 'post/detail.html', {'post': post, 'form': form, 'comments': comments})
+
+def approve_post(request, activation_key):
+    try:
+        # get post with given activation key
+        p = get_object_or_404(Post, activation_key=activation_key)
+        # approve post
+        p.approve()
+        # redirect to homepage
+        messages.info(request, _("Post approved."))
+    except:
+        messages.info(request, _("Post approve problem!"))
+
+    return HttpResponseRedirect(reverse("home"))

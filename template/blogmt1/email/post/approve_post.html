@@ -1,0 +1,13 @@
+{% extends "email/base.html" %}
+{% load i18n %}
+
+{% block content %}
+{% blocktrans %}
+Hi Admin,
+
+please approve new post:
+{% endblocktrans %}
+
+<a href="http://{{ site.domain }}{% url approve_post post.activation_key %}">{% trans "Approve Post"%}</a>
+
+{% endblock %}

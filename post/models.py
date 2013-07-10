@@ -5,6 +5,10 @@ from celery import task
 import PIL
 from PIL import Image
 import settings
+from django.contrib.sites.models import Site
+from django.core.mail import send_mail
+from django.template.loader import get_template 
+from django.template import Context
 
 class Post(models.Model):
     user = models.ForeignKey(User)
@@ -13,6 +17,7 @@ class Post(models.Model):
     content = models.TextField()
     description = models.CharField(max_length=255)
     image = models.ImageField(_("Post Image"), upload_to="upload/post/", blank=True, null=True)
+    activation_key =  models.CharField(max_length=30, null=True, blank=True)
     is_active = models.BooleanField(default=False)
     is_approved = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -45,6 +50,30 @@ class Post(models.Model):
         image = image.resize((basewidth,hsize), PIL.Image.ANTIALIAS)
         image.save(image_path)
         return True
+
+    @task
+    def notify_admin(self):
+        site = Site.objects.get_current()
+        # send email with template
+        send_mail(
+            _('Please approve new post!'),
+            get_template('email/post/approve_post.html').render(
+                Context({
+                    'site': site,
+                    'user': self.user,
+                    'post': self
+                })
+            ),
+            '',
+            settings.ADMINS,
+            fail_silently = True
+        )
+        return True
+
+    def approve(self):
+        self.is_approved = True
+        self.save()
+        return self.is_approved
 
     class Meta:
         app_label = 'post'

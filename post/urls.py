@@ -5,4 +5,5 @@ urlpatterns = patterns("",
     url(r'^(?P<post_id>\d+)/$', 'post.views.detail', name='post_detail'),
     url(r'^create-post/$', 'post.views.create_post', name='create_post'),
     url(r'^edit-post/(?P<post_id>\d+)/$', 'post.views.edit_post', name='edit_post'),
+    url(r'^approve-post/(?P<activation_key>.+)/$', 'post.views.approve_post', name='approve_post'),
 )
