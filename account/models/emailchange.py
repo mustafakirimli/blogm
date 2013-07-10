@@ -33,6 +33,11 @@ class EmailChange(models.Model):
         change = EmailChange.objects.filter(user=user, is_active=True)
         return change[0] if change else False
 
+    def activate_email(self):
+        self.is_active = False
+        self.save()
+        return self.is_active
+
     @task
     def send_activation_email(self):
         """
