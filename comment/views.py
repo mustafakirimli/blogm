@@ -1,17 +1,11 @@
-from django.http import HttpResponse
 from comment.forms import CommentForm
-from django.http import HttpResponseRedirect
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
-from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from comment.models import Comment
 from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404
-
-def index(request):
-    return HttpResponse("Welcome to my blog!")
+from django.shortcuts import get_object_or_404, redirect
 
 def add_comment(request):
     if request.method == 'POST':
@@ -25,7 +19,7 @@ def add_comment(request):
             comment.save()
             comment.notify_admin.delay(comment)
             messages.success(request, _("Comment created succesfully."))
-        return HttpResponseRedirect(reverse("post_detail", kwargs={'post_id':request.POST.get("parent_id")}))
+        return redirect("post_detail", post_id=request.POST.get("parent_id"))
 
 def approve_comment(request, activation_key):
     try:
@@ -38,4 +32,4 @@ def approve_comment(request, activation_key):
     except:
         messages.info(request, _("Comment approve problem!"))
 
-    return HttpResponseRedirect(reverse("home"))
+    return redirect("home")

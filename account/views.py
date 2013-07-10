@@ -121,10 +121,9 @@ def change_password(request):
         'form': form,
     })
 
-#@login_required
-#TODO: not implemented
+@login_required
 def forgot_password(request):
-    return HttpResponse("Forgot Password!")
+    return render(request, 'account/fpassword.html')
 
 @login_required
 def change_email(request):

@@ -1,20 +1,14 @@
-from django.http import HttpResponse
-from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from post.forms import PostForm
 from django.contrib import messages
-from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.contenttypes.models import ContentType
-from comment.forms import CommentForm
-from post.models import Post
-from comment.models import Comment
 from django.contrib.auth.models import User
 
-def index(request):
-    return HttpResponse("Blog Posts!")
+from comment.forms import CommentForm
+from post.models import Post
+from post.forms import PostForm
+from comment.models import Comment
 
 @login_required
 def create_post(request):
@@ -30,7 +24,7 @@ def create_post(request):
             post.resize_post_image.delay(post)
             post.notify_admin.delay(post)
             messages.success(request, _("Post created succesfully."))
-            return HttpResponseRedirect(reverse("my_posts"))
+            return redirect("my_posts")
     else:
         form = PostForm()
 
@@ -53,7 +47,7 @@ def edit_post(request, post_id):
             post.notify_admin.delay(post)
             post.resize_post_image.delay(post)
             messages.success(request, _("Post updated succesfully."))
-            return HttpResponseRedirect(reverse("my_posts"))
+            return redirect("my_posts")
     else:
         form = PostForm(instance=post)
 
@@ -97,4 +91,4 @@ def approve_post(request, activation_key):
     except:
         messages.info(request, _("Post approve problem!"))
 
-    return HttpResponseRedirect(reverse("home"))
+    return redirect("home")
