@@ -1,45 +1,137 @@
-#: account/forms.py:11
+#: account/forms.py:12
 msgid "E-mail"
 msgstr ""
 
-#: account/forms.py:12
+#: account/forms.py:13 account/forms.py:52
 msgid "Password"
 msgstr ""
 
-#: account/forms.py:14
+#: account/forms.py:15
 msgid "Password (Confirm)"
 msgstr ""
 
-#: account/views.py:26
-msgid "Thanks for registering. Please check your email box for activation."
+#: account/forms.py:47
+msgid "Username"
 msgstr ""
 
-#: account/views.py:44
-msgid "Account activated."
+#: account/forms.py:48
+msgid "Username can contain any letters or numbers, without spaces"
+msgstr ""
+
+#: account/forms.py:62
+msgid "Invalid email/password"
+msgstr ""
+
+#: account/forms.py:111 account/forms.py:145
+msgid "Current Password"
+msgstr ""
+
+#: account/forms.py:113
+msgid "New Password"
+msgstr ""
+
+#: account/forms.py:115
+msgid "New Password (again)"
+msgstr ""
+
+#: account/forms.py:120
+msgid "Please type your current password."
+msgstr ""
+
+#: account/forms.py:128
+msgid "The new passwords are not the same"
+msgstr ""
+
+#: account/forms.py:164
+msgid "Please type your current password"
 msgstr ""
 
 #: account/views.py:46
+msgid "Thanks for registering. Please check your inbox for activation email."
+msgstr ""
+
+#: account/views.py:65
+msgid "Account activated."
+msgstr ""
+
+#: account/views.py:67
 msgid "Account activation problem!"
 msgstr ""
 
-#: account/models/userprofile.py:15
+#: account/views.py:99
+msgid "Profile updated succesfully."
+msgstr ""
+
+#: account/views.py:115
+msgid "Password  updated succesfully."
+msgstr ""
+
+#: account/views.py:153
+msgid "Email change request created. Please check your email box"
+msgstr ""
+
+#: account/views.py:178
+msgid "Your email address activated"
+msgstr ""
+
+#: account/models/emailchange.py:74
+msgid "Please confirm email change request!"
+msgstr ""
+
+#: account/models/userprofile.py:22
 msgid "Profile Pic"
 msgstr ""
 
-#: account/models/userprofile.py:17
+#: account/models/userprofile.py:29
 msgid "Male"
 msgstr ""
 
-#: account/models/userprofile.py:18
+#: account/models/userprofile.py:30
 msgid "Female"
 msgstr ""
 
-#: account/models/userprofile.py:35
+#: account/models/userprofile.py:54
 msgid "Thanks for signing up!"
 msgstr ""
 
-#: post/models.py:11
+#: comment/models.py:45
+msgid "Please approve new comment!"
+msgstr ""
+
+#: comment/views.py:23
+msgid "Comment created succesfully."
+msgstr ""
+
+#: comment/views.py:33
+msgid "Comment approved."
+msgstr ""
+
+#: comment/views.py:35
+msgid "Comment approve problem!"
+msgstr ""
+
+#: post/models.py:19
 msgid "Post Image"
+msgstr ""
+
+#: post/models.py:62
+msgid "Please approve new post!"
+msgstr ""
+
+#: post/views.py:26
+msgid "Post created succesfully."
+msgstr ""
+
+#: post/views.py:49
+msgid "Post updated succesfully."
+msgstr ""
+
+#: post/views.py:90
+msgid "Post approved."
+msgstr ""
+
+#: post/views.py:92
+msgid "Post approve problem!"
 msgstr ""
 
 #: template/blogmt1/404.html:5 template/blogmt1/404.html.py:14
@@ -66,44 +158,23 @@ msgstr ""
 msgid "Error 500"
 msgstr ""
 
-#: template/blogmt1/home.html:11
+#: template/blogmt1/home.html:13
 msgid "Read More"
 msgstr ""
 
-#: template/blogmt1/home.html:22
+#: template/blogmt1/home.html:24
 msgid "View details"
 msgstr ""
 
-#: template/blogmt1/account/base.html:9
-msgid "Admin Menu"
+#: template/blogmt1/account/email.html:7
+#: template/blogmt1/account/index.html:39
+msgid "Warning"
 msgstr ""
 
-#: template/blogmt1/account/base.html:10
-msgid "Dashboard"
-msgstr ""
-
-#: template/blogmt1/account/base.html:11 template/blogmt1/base/page.html:49
-msgid "Update Profile"
-msgstr ""
-
-#: template/blogmt1/account/base.html:12 template/blogmt1/base/page.html:50
-msgid "Change Password"
-msgstr ""
-
-#: template/blogmt1/account/base.html:13 template/blogmt1/base/page.html:51
-msgid "Change Email"
-msgstr ""
-
-#: template/blogmt1/account/base.html:15
-msgid "My Posts"
-msgstr ""
-
-#: template/blogmt1/account/base.html:16 template/blogmt1/base/page.html:52
-msgid "Create Post"
-msgstr ""
-
-#: template/blogmt1/account/base.html:18 template/blogmt1/base/page.html:53
-msgid "Logout"
+#: template/blogmt1/account/email.html:8
+#: template/blogmt1/account/index.html:40
+#, python-format
+msgid "Email address activation request pending for %(email)s "
 msgstr ""
 
 #: template/blogmt1/account/index.html:7 template/blogmt1/base/page.html:44
@@ -111,29 +182,45 @@ msgstr ""
 msgid "My Account"
 msgstr ""
 
-#: template/blogmt1/account/index.html:25
+#: template/blogmt1/account/index.html:19
 msgid "Firt Name"
 msgstr ""
 
-#: template/blogmt1/account/index.html:30
+#: template/blogmt1/account/index.html:24
 msgid "Last Name"
 msgstr ""
 
-#: template/blogmt1/account/index.html:34
+#: template/blogmt1/account/index.html:28
 msgid "Gender"
 msgstr ""
 
-#: template/blogmt1/account/index.html:38
+#: template/blogmt1/account/index.html:32
 msgid "Email"
 msgstr ""
 
-#: template/blogmt1/account/index.html:45
-msgid "Warning"
+#: template/blogmt1/account/posts.html:7
+#: template/blogmt1/block/navigation.html:10
+msgid "My Posts"
 msgstr ""
 
-#: template/blogmt1/account/index.html:46
-#, python-format
-msgid "Email address activation request pending for %(change.email)s "
+#: template/blogmt1/account/posts.html:18
+msgid "Post Name"
+msgstr ""
+
+#: template/blogmt1/account/posts.html:19
+msgid "Post Title"
+msgstr ""
+
+#: template/blogmt1/account/posts.html:20
+msgid "Created At"
+msgstr ""
+
+#: template/blogmt1/account/posts.html:21
+msgid "Post Status"
+msgstr ""
+
+#: template/blogmt1/account/posts.html:37
+msgid "No entry found!"
 msgstr ""
 
 #: template/blogmt1/base/page.html:5
@@ -156,12 +243,42 @@ msgstr ""
 msgid "About"
 msgstr ""
 
+#: template/blogmt1/base/page.html:49 template/blogmt1/block/navigation.html:6
+msgid "Update Profile"
+msgstr ""
+
+#: template/blogmt1/base/page.html:50 template/blogmt1/block/navigation.html:7
+msgid "Change Password"
+msgstr ""
+
+#: template/blogmt1/base/page.html:51 template/blogmt1/block/navigation.html:8
+msgid "Change Email"
+msgstr ""
+
+#: template/blogmt1/base/page.html:52
+#: template/blogmt1/block/navigation.html:11
+msgid "Create Post"
+msgstr ""
+
+#: template/blogmt1/base/page.html:53
+#: template/blogmt1/block/navigation.html:13
+msgid "Logout"
+msgstr ""
+
 #: template/blogmt1/base/page.html:57
 msgid "Register"
 msgstr ""
 
 #: template/blogmt1/base/page.html:58
 msgid "Login"
+msgstr ""
+
+#: template/blogmt1/block/navigation.html:4
+msgid "Admin Menu"
+msgstr ""
+
+#: template/blogmt1/block/navigation.html:5
+msgid "Dashboard"
 msgstr ""
 
 #: template/blogmt1/email/account/activate.html:5
@@ -175,4 +292,40 @@ msgstr ""
 
 #: template/blogmt1/email/account/activate.html:12
 msgid "Enable Account"
+msgstr ""
+
+#: template/blogmt1/email/account/email_activate.html:5
+msgid ""
+"\n"
+"Hi,\n"
+"\n"
+"Please enable your new email address with below link:\n"
+msgstr ""
+
+#: template/blogmt1/email/account/email_activate.html:11
+msgid "Activate Email"
+msgstr ""
+
+#: template/blogmt1/email/comment/approve_comment.html:5
+msgid ""
+"\n"
+"Hi Admin,\n"
+"\n"
+"please approve new comment:\n"
+msgstr ""
+
+#: template/blogmt1/email/comment/approve_comment.html:11
+msgid "Approve Comment"
+msgstr ""
+
+#: template/blogmt1/email/post/approve_post.html:5
+msgid ""
+"\n"
+"Hi Admin,\n"
+"\n"
+"please approve new post:\n"
+msgstr ""
+
+#: template/blogmt1/email/post/approve_post.html:11
+msgid "Approve Post"
 msgstr ""
