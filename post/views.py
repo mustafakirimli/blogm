@@ -13,20 +13,23 @@ from comment.models import Comment
 @login_required
 def create_post(request):
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
+        form = PostForm(request.user, 
+                        request.POST, 
+                        request.FILES)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.user = request.user
-            post.activation_key = User.objects.make_random_password()
-            post.is_active = True
-            post.is_approved = False
-            post.save()
+            # save form, create post
+            post = form.save()
+
+            # add resize image task to celery
             post.resize_post_image.delay(post)
+
+            # add notify admin task to celery
             post.notify_admin.delay(post)
+
             messages.success(request, _("Post created succesfully."))
             return redirect("my_posts")
     else:
-        form = PostForm()
+        form = PostForm(request.user)
 
     return render(request, 'post/create_post.html', {
         'form': form,
@@ -38,18 +41,24 @@ def edit_post(request, post_id):
                              user=request.user)
 
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES, instance=post)
+        form = PostForm(request.user,
+                        request.POST, 
+                        request.FILES, 
+                        instance=post)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.user = request.user
-            post.is_approved = False
-            post.save()
-            post.notify_admin.delay(post)
+            # update post
+            post = form.save()
+
+            # add resize image task to celery
             post.resize_post_image.delay(post)
+
+            # add notify admin task to celery
+            post.notify_admin.delay(post)
+            
             messages.success(request, _("Post updated succesfully."))
             return redirect("my_posts")
     else:
-        form = PostForm(instance=post)
+        form = PostForm(request.user, instance=post)
 
     return render(request, 'post/edit_post.html', {
         'form': form,
