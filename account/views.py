@@ -7,7 +7,6 @@ from django.contrib.auth import logout, login, authenticate
 from django.utils.translation import ugettext as _
 from django.contrib import messages
 
-
 from post.models import Post
 from account.models import UserProfile, EmailChange
 from account.forms import (RegisterForm, LoginForm, ProfileForm, 
