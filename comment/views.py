@@ -21,6 +21,7 @@ def add_comment(request):
             comment.user = request.user
             comment.comment_type = ContentType.objects.get(app_label="post", model="post")
             comment.activation_key = User.objects.make_random_password()
+            comment.is_approved = False
             comment.save()
             comment.notify_admin.delay(comment)
             messages.success(request, _("Comment created succesfully."))

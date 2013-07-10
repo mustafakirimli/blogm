@@ -24,6 +24,8 @@ def create_post(request):
             post = form.save(commit=False)
             post.user = request.user
             post.activation_key = User.objects.make_random_password()
+            post.is_active = True
+            post.is_approved = False
             post.save()
             post.resize_post_image.delay(post)
             post.notify_admin.delay(post)
@@ -44,7 +46,9 @@ def edit_post(request, post_id):
         if form.is_valid():
             post = form.save(commit=False)
             post.user = request.user
+            post.is_approved = False
             post.save()
+            post.notify_admin.delay(post)
             post.resize_post_image.delay(post)
             messages.success(request, _("Post updated succesfully."))
             return HttpResponseRedirect(reverse("my_posts"))
