@@ -5,7 +5,7 @@
 {% block content %}
   <div class="post">
       <h1 class="text-center">{{post.name}}</h1>
-      <p class="text-right post-date">03 Mar 2013</p>
+      <p class="text-right post-date">{{ post.created_at|date:'d M Y' }}</p>
       <br/>
       {% if post.image %}
       <img class="pimg" src="{{ MEDIA_URL }}{{post.image}}" width="200" heigth=""/>
