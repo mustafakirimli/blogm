@@ -39,8 +39,10 @@ def create_post(request):
     })
 
 def edit_post(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
-    print post.name
+    post = get_object_or_404(Post, 
+                             pk=post_id,
+                             user=request.user)
+
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
@@ -60,11 +62,29 @@ def edit_post(request, post_id):
     })
 
 def detail(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
-    comments = Comment.objects.filter(parent_id=post_id, is_active=True, is_approved=True)
+    # get (active and approved) post or raise 404
+    post = get_object_or_404(Post, 
+                             pk=post_id, 
+                             is_active=True, 
+                             is_approved=True)
+
+    # get (active and approved) post comments
+    comments = Comment.objects.filter(parent_id=post_id, 
+                                      is_active=True, 
+                                      is_approved=True)
+
+    # new comment form
     post_type = ContentType.objects.get(app_label="post", model="post")
-    form = CommentForm(initial={"parent_id":post_id, "comment_type":post_type.id})
-    return render(request, 'post/detail.html', {'post': post, 'form': form, 'comments': comments})
+    initial = {"parent_id":post_id, 
+               "comment_type":post_type.id
+               }
+    form = CommentForm(initial=initial)
+    
+    return render(request, 'post/detail.html', {
+        'post': post, 
+        'form': form, 
+        'comments': comments
+    })
 
 def approve_post(request, activation_key):
     try:

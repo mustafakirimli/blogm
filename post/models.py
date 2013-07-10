@@ -37,6 +37,9 @@ class Post(models.Model):
 
     @task
     def resize_post_image(self):
+        if not self.image:
+            return True
+
         image_path = "%s/%s" %(settings.MEDIA_ROOT, self.image)
 
         basewidth = 200
