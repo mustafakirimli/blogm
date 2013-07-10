@@ -19,7 +19,7 @@ class Comment(models.Model):
     email = models.CharField(max_length=100, null=True, blank=True)
     content = models.TextField()
     activation_key =  models.CharField(max_length=30, null=True, blank=True)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_approved = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True, blank=True)
