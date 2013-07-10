@@ -9,26 +9,45 @@ from django.template.loader import get_template
 from django.template import Context
 
 class UserProfile(models.Model):
+    # user
     user = models.OneToOneField(User)
+
+    # is approved -activated-
     is_approved = models.BooleanField(default=False)
+
+    # activation key
     activation_key = models.CharField(max_length=30, null=True)
-    image = models.ImageField(_("Profile Pic"), upload_to="upload/profile/", blank=True, null=True)
+
+    # profile pictures -resizing to 100px-
+    image = models.ImageField(_("Profile Pic"), 
+                              upload_to="upload/profile/", 
+                              blank=True, 
+                              null=True)
+    
+    # gender
     GENDER_CHOICES = (
         ('M', _('Male')),
         ('F', _('Female')),
     )
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, null=True, blank=True)
+    gender = models.CharField(max_length=1, 
+                              choices=GENDER_CHOICES, 
+                              null=True, 
+                              blank=True)
 
     def __str__(self):
         return "%s's profile" % self.user
 
     def activate(self):
+        """
+        Activate user -profile-
+        """
         self.is_approved = True
         self.save()
         return self.is_approved
 
     @task
     def send_activation_email(self):
+        # get current site for url
         site = Site.objects.get_current()
         # send email with template
         send_mail(

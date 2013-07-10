@@ -33,9 +33,34 @@ class EmailChange(models.Model):
         change = EmailChange.objects.filter(user=user, is_active=True)
         return change[0] if change else False
 
+    @staticmethod
+    def create_request(user, email):
+        # generate random hash
+        activation_key = User.objects.make_random_password()
+
+        # set all the old requests to false for this user
+        EmailChange.objects.filter(user=request.user).update(is_active=False)
+
+        # create request
+        email_change = EmailChange.objects.create(user=user, 
+                                                  email=email, 
+                                                  is_active=True, 
+                                                  activation_key=activation_key)
+        return email_change
+
     def activate_email(self):
+        """
+        activate email change requests -mark as completed-
+        """
+        # set new email address to user object
+        self.user.email = self.email
+        self.user.save()
+
+        # set status to false
         self.is_active = False
         self.save()
+
+        # return status
         return self.is_active
 
     @task

@@ -3,32 +3,53 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import logout, login, authenticate
 from django.core.urlresolvers import reverse
-from account.models import UserProfile, EmailChange
-from post.models import Post
-from django.contrib import messages
 from django.utils.translation import ugettext as _
-from account.forms import RegisterForm, LoginForm, ProfileForm, UserForm, PasswordForm, EmailForm
+from django.contrib import messages
 import string, random
+
+from post.models import Post
+from account.models import UserProfile, EmailChange
+from account.forms import RegisterForm, LoginForm, ProfileForm 
+from account.forms import UserForm, PasswordForm, EmailForm
 
 @login_required
 def index(request):
+    # get user
     user = request.user
+    
+    # get profile
     profile = user.get_profile()
+
+    # get email change requests for user
     email_change = EmailChange.pending_requests(user)
-    return render(request, 'account/index.html', {'user': user, 'profile': profile, 'change': email_change})
+    
+    return render(request, 'account/index.html', {
+        'user': user, 
+        'profile': profile, 
+        'change': email_change
+    })
 
 @user_passes_test(lambda u: u.is_anonymous())
 def register_user(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            new_user = form.save()
-            messages.info(request, _("Thanks for registering. Please check your email box for activation."))
-            profile = new_user.get_profile()
+            # save form, it gets user object
+            user = form.save()
+            
+            # get user profile
+            profile = user.get_profile()
+
+            # send activation email to user
             profile.send_activation_email.delay(profile)
-            return HttpResponseRedirect(reverse("account_home")) # Redirect after POST
+            
+            messages.info(request, _("Thanks for registering. Please check "
+                                     "your inbox for activation email."))
+
+            # Redirect to account home page
+            return HttpResponseRedirect(reverse("home")) 
     else:
-        form = RegisterForm() # An unbound form
+        form = RegisterForm()
        
     return render(request, 'account/register.html', {
         'form': form,
@@ -69,14 +90,19 @@ def login_user(request):
 
 @login_required
 def update_profile(request):
+    # get user profile
+    profile = request.user.get_profile()
+
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=request.user.get_profile())
+        form = ProfileForm(request.POST, 
+                           request.FILES, 
+                           instance=profile)
         if form.is_valid():
             form.save()
-            messages.success(request, _("Profile informations updated succesfully."))
+            messages.success(request, _("Profile updated succesfully."))
             return HttpResponseRedirect(reverse('update_profile'))
     else:
-        form = ProfileForm(instance=request.user.get_profile())
+        form = ProfileForm(instance=profile)
        
     return render(request, 'account/profile.html', {
         'form': form,
@@ -85,10 +111,11 @@ def update_profile(request):
 @login_required
 def change_password(request):
     if request.method == 'POST':
-        form = PasswordForm(request.POST,instance=request.user)
+        form = PasswordForm(request.POST,
+                            instance=request.user)
         if form.is_valid():
             form.save()
-            messages.success(request, _("Password informations updated succesfully."))
+            messages.success(request, _("Password  updated succesfully."))
             return HttpResponseRedirect(reverse('change_password'))
     else:
         form = PasswordForm(instance=request.user)
@@ -98,45 +125,75 @@ def change_password(request):
     })
 
 #@login_required
+#TODO: not implemented
 def forgot_password(request):
     return HttpResponse("Forgot Password!")
 
 @login_required
 def change_email(request):
-    email_change = EmailChange.pending_requests(request.user) if not request.GET.get("success") else None
+    # pending email change requests
+    email_change = EmailChange.pending_requests(request.user)
+
+    # dont show email change request if requests created now
+    if request.GET.get("success"):
+        email_change = False
+
     if request.method == 'POST':
-        form = EmailForm(request.POST,instance=request.user)
+        form = EmailForm(request.POST,
+                         instance=request.user)
+        
+        # new email address
+        email = request.POST.get("email")
+
         if form.is_valid():
             form.save()
 
-            activation_key = ''.join([random.choice(string.digits + string.letters) for i in range(12)])
-            EmailChange.objects.filter(user=request.user).update(is_active=False)
-            emailChange = EmailChange.objects.create(user=request.user, email=request.POST.get("email"), is_active=True, activation_key=activation_key)
-            emailChange.send_activation_email.delay(emailChange)
-            messages.success(request, _("Email informations updated succesfully."))
+            # create email change requests
+            email_change = EmailChange.create_request(request.user, email)
+
+            # send email activation mail
+            email_change.send_activation_email.delay(email_change)
+
+            messages.success(request, _('Email change request created. '
+                                        'Please check your email box'))
+
+            # redirect url
             redirect_url = "%s%s" %(reverse('change_email'), "?success=true")
+
+            # redirect to same page with success parameters
             return HttpResponseRedirect(redirect_url)
     else:
+        # create email change request form
         form = EmailForm(instance=request.user)
 
     return render(request, 'account/email.html', {
-        'form': form, 'change': email_change
+        'form': form, 
+        'change': email_change
     })
 
 @login_required
 def activate_email(request, activation_key):
-    change = EmailChange.objects.get(user=request.user, is_active=True, activation_key=activation_key)
-    request.user.email = change.email
-    request.user.save()
-    change.is_active = False
-    change.save()
-    messages.success(request, _("Email address activated"))
-    return HttpResponseRedirect(reverse('account_home'))
+    ec = get_object_or_404(EmailChange,
+                           activation_key=activation_key)
+
+    # process email change request
+    ec.activate_email()
+
+    # add success message
+    messages.success(request, _("Your email address activated"))
+
+    # redirect to homepage
+    return HttpResponseRedirect(reverse('home'))
 
 @login_required
 def my_posts(request):
+    """
+    Return users all post
+    """
     posts = Post.objects.filter(user=request.user)
-    return render(request, 'account/posts.html', {'posts': posts})
+    return render(request, 'account/posts.html', {
+        'posts': posts
+    })
 
 @login_required
 def logout_user(request):

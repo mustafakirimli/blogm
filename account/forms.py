@@ -40,14 +40,26 @@ class RegisterForm(forms.Form):
 
 
 class LoginForm(forms.Form):
-    username = forms.RegexField(regex=r'^[\w.@+-]+$',
-                                max_length=100,
-                                label=_("Username"),
-                                error_messages={'invalid': _("Username can contain any letters or numbers, without spaces")})
+    username = forms.RegexField(
+                        regex=r'^[\w.@+-]+$',
+                        max_length=100,
+                        label=_("Username"),
+                        error_messages={'invalid': _("Username can contain any "
+                                                     "letters or numbers, "
+                                                     "without spaces")})
 
     password = forms.CharField(label=_("Password"),
                                 widget=forms.PasswordInput)
 
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        user = User.objects.filter(email=username)
+        if not user.is_active:
+            disabled_msg = 'Disabled account. Please contact blog admin'
+            raise forms.ValidationError(u_(disabled_msg))
+        elif not user.get_profile().is_approved:
+            deactive_msg = 'Not activated account! Please activate your account'
+            raise forms.ValidationError(u_(deactive_msg))
 
 class UserForm(forms.ModelForm):
     class Meta:
@@ -87,19 +99,27 @@ class ProfileForm(forms.ModelForm):
         fields = ('image', 'gender')
 
 class PasswordForm(forms.ModelForm):
-    oldpassword = forms.CharField(widget=PasswordInput(),label=_('Current Password'))
-    password1 = forms.CharField(widget=PasswordInput(),label=_('New Password'))
-    password2 = forms.CharField(widget=PasswordInput(),label=_('New Password (again)'))
+    oldpassword = forms.CharField(widget=PasswordInput(),
+                                  label=_('Current Password'))
+    password1 = forms.CharField(widget=PasswordInput(),
+                                label=_('New Password'))
+    password2 = forms.CharField(widget=PasswordInput(),
+                                label=_('New Password (again)'))
 
     def clean_oldpassword(self):
-        if self.cleaned_data.get("oldpassword") and not self.instance.check_password(self.cleaned_data["oldpassword"]):
+        oldpassword = self.cleaned_data.get("oldpassword")
+        if oldpassword and not self.instance.check_password(oldpassword):
             raise forms.ValidationError(_("Please type your current password."))
-        return self.cleaned_data["oldpassword"]
+        return oldpassword
 
     def clean_password2(self):
-        if self.cleaned_data.get('password1') and self.cleaned_data.get('password2') and self.cleaned_data['password1'] != self.cleaned_data['password2']:
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+        
+        if password1 and password2 and password1 != password2:
             raise forms.ValidationError(_('The new passwords are not the same'))
-        return self.cleaned_data['password2']
+        
+        return password2
 
     def save(self):
         self.instance.set_password(self.cleaned_data["password2"])
@@ -112,19 +132,29 @@ class PasswordForm(forms.ModelForm):
 
 
 class EmailForm(forms.ModelForm):
-    password = forms.CharField(widget=PasswordInput(),label=_('Current Password'))
+    password = forms.CharField(
+                    widget=PasswordInput(),
+                    label=_('Current Password')
+                )
 
     def clean_email(self):
-        if self.cleaned_data.get("email") and User.objects.filter(email=self.cleaned_data["email"]):
-            raise forms.ValidationError(_("Email address already using by another user!"))
-        elif self.cleaned_data.get("email") and EmailChange.objects.filter(email=self.cleaned_data["email"]):
-            raise forms.ValidationError(_("Email address already using by another user!"))
-        return self.cleaned_data["email"]
+        email = self.cleaned_data.get("email")
+        email_msg = "Email address already using by another user!"
+        
+        # search email on User table
+        if email and User.objects.filter(email=email):
+            raise forms.ValidationError(_(email_msg))
+        # search email on EmailChange table 
+        elif email and EmailChange.objects.filter(email=email):
+            raise forms.ValidationError(_(email_msg))
+        
+        return email
 
     def clean_password(self):
-        if self.cleaned_data.get("password") and not self.instance.check_password(self.cleaned_data["password"]):
+        password = self.cleaned_data.get("password")
+        if password and not self.instance.check_password(password):
             raise forms.ValidationError(_("Please type your current password"))
-        return self.cleaned_data["password"]
+        return password
 
     def save(self):
         return self.instance
