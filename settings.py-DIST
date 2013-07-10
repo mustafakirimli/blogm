@@ -193,4 +193,5 @@ BROKER_URL = 'amqp://guest:guest@localhost:5672/'
 CELERY_IMPORTS = ("tasks",
                   "account.models.userprofile", 
                   "account.models.emailchange",
-                  "post.models",)
+                  "post.models",
+                  "comment.models")
