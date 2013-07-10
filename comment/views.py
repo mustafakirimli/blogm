@@ -1,11 +1,12 @@
-from comment.forms import CommentForm
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib import messages
 from django.utils.translation import ugettext as _
-from comment.models import Comment
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect
+
+from comment.models import Comment
+from comment.forms import CommentForm
 
 def add_comment(request):
     if request.method == 'POST':
@@ -15,6 +16,7 @@ def add_comment(request):
             comment.user = request.user
             comment.comment_type = ContentType.objects.get(app_label="post", model="post")
             comment.activation_key = User.objects.make_random_password()
+            comment.is_active = True
             comment.is_approved = False
             comment.save()
             comment.notify_admin.delay(comment)

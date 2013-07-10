@@ -1,10 +1,10 @@
+import PIL
+import settings
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from celery import task
-import PIL
 from PIL import Image
-import settings
 from django.contrib.sites.models import Site
 from django.core.mail import send_mail
 from django.template.loader import get_template 

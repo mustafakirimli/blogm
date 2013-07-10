@@ -1,3 +1,4 @@
+import settings
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
@@ -7,7 +8,6 @@ from django.contrib.sites.models import Site
 from django.core.mail import send_mail
 from django.template.loader import get_template 
 from django.template import Context
-import settings
 
 class Comment(models.Model):
     limit = (models.Q(app_label='post', model='post') |                         

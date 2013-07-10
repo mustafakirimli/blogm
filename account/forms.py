@@ -1,9 +1,10 @@
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
-from account.models import UserProfile,EmailChange
 from django import forms
 from django.forms import CharField, Form, PasswordInput
 from PIL import Image
+
+from account.models import UserProfile,EmailChange
 
 class RegisterForm(forms.Form):
     first_name = forms.CharField()
