@@ -54,12 +54,19 @@ class LoginForm(forms.Form):
     def clean_username(self):
         username = self.cleaned_data.get('username')
         user = User.objects.filter(email=username)
+        
+        if user.exists():
+            user = user[0]
+        else:
+            raise forms.ValidationError(_("Invalid email/password"))
+
         if not user.is_active:
             disabled_msg = 'Disabled account. Please contact blog admin'
-            raise forms.ValidationError(u_(disabled_msg))
+            raise forms.ValidationError(_(disabled_msg))
         elif not user.get_profile().is_approved:
             deactive_msg = 'Not activated account! Please activate your account'
-            raise forms.ValidationError(u_(deactive_msg))
+            raise forms.ValidationError(_(deactive_msg))
+        return username
 
 class UserForm(forms.ModelForm):
     class Meta:

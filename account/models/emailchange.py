@@ -39,7 +39,7 @@ class EmailChange(models.Model):
         activation_key = User.objects.make_random_password()
 
         # set all the old requests to false for this user
-        EmailChange.objects.filter(user=request.user).update(is_active=False)
+        EmailChange.objects.filter(user=user).update(is_active=False)
 
         # create request
         email_change = EmailChange.objects.create(user=user, 
