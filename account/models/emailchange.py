@@ -20,7 +20,7 @@ class EmailChange(models.Model):
     # email change request status 
     # True: pending request
     # False: approved request
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     # email change request created time
     created_at = models.DateTimeField(auto_now_add=True)
