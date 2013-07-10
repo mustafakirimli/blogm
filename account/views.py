@@ -1,16 +1,17 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+import string
+import random
+from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import logout, login, authenticate
-from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.contrib import messages
-import string, random
+
 
 from post.models import Post
 from account.models import UserProfile, EmailChange
-from account.forms import RegisterForm, LoginForm, ProfileForm 
-from account.forms import UserForm, PasswordForm, EmailForm
+from account.forms import (RegisterForm, LoginForm, ProfileForm, 
+                           UserForm, PasswordForm, EmailForm)
 
 @login_required
 def index(request):
@@ -47,7 +48,7 @@ def register_user(request):
                                      "your inbox for activation email."))
 
             # Redirect to account home page
-            return HttpResponseRedirect(reverse("home")) 
+            return redirect("home") 
     else:
         form = RegisterForm()
        
@@ -66,7 +67,7 @@ def activate_account(request, activation_key):
     except:
         messages.info(request, _("Account activation problem!"))
 
-    return HttpResponseRedirect(reverse("account_home"))
+    return redirect("account_home")
 
 @user_passes_test(lambda u: u.is_anonymous(), login_url="/account/")
 def login_user(request):
@@ -76,11 +77,8 @@ def login_user(request):
             username = form.cleaned_data["username"]
             password = form.cleaned_data["password"]
             user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return HttpResponseRedirect(reverse('home'))
-            else:
-                messages.error(request, _("Invalid email/password"))
+            login(request, user)
+            return redirect('home')
     else:
         form = LoginForm()
        
@@ -100,7 +98,7 @@ def update_profile(request):
         if form.is_valid():
             form.save()
             messages.success(request, _("Profile updated succesfully."))
-            return HttpResponseRedirect(reverse('update_profile'))
+            return redirect('update_profile')
     else:
         form = ProfileForm(instance=profile)
        
@@ -116,7 +114,7 @@ def change_password(request):
         if form.is_valid():
             form.save()
             messages.success(request, _("Password  updated succesfully."))
-            return HttpResponseRedirect(reverse('change_password'))
+            return redirect('change_password')
     else:
         form = PasswordForm(instance=request.user)
 
@@ -157,11 +155,10 @@ def change_email(request):
             messages.success(request, _('Email change request created. '
                                         'Please check your email box'))
 
-            # redirect url
-            redirect_url = "%s%s" %(reverse('change_email'), "?success=true")
-
             # redirect to same page with success parameters
-            return HttpResponseRedirect(redirect_url)
+            response = redirect("change_email")
+            response['Location'] += '?success=true'
+            return response
     else:
         # create email change request form
         form = EmailForm(instance=request.user)
@@ -183,7 +180,7 @@ def activate_email(request, activation_key):
     messages.success(request, _("Your email address activated"))
 
     # redirect to homepage
-    return HttpResponseRedirect(reverse('home'))
+    return redirect('home')
 
 @login_required
 def my_posts(request):
@@ -198,4 +195,4 @@ def my_posts(request):
 @login_required
 def logout_user(request):
     logout(request)
-    return HttpResponseRedirect(reverse('home'))
+    return redirect('home')
