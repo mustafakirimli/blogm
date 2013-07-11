@@ -198,7 +198,10 @@ class EmailForm(forms.ModelForm):
         email = self.cleaned_data.get("email")
         email_msg = "Email address already using by another user!"
         
-        if self.instance.email == email:
+        if len(email) > 75:
+            raise forms.ValidationError(_('Email address too long. '
+                                           'Please enter maximum 75 characters.'))
+        elif self.instance.email == email:
             raise forms.ValidationError(_("Please enter a new email address"))
         # search email on User table
         if email and User.objects.filter(email=email):

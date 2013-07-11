@@ -8,6 +8,21 @@ from django.contrib.contenttypes.models import ContentType
 from comment.models import Comment
 
 class CommentForm(forms.ModelForm):
+
+    def clean_fullname(self):
+        fullname = self.cleaned_data.get('fullname')
+
+        if len(fullname) > 100:
+            raise forms.ValidationError(_('Ensure this value has at most 100 characters'))
+        return fullname
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+
+        if len(email) > 100:
+            raise forms.ValidationError(_('Ensure this value has at most 100 characters'))
+        return email
+
     parent_id = forms.CharField(widget=forms.HiddenInput())
     comment_type = forms.CharField(widget=forms.HiddenInput())
 
