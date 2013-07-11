@@ -19,16 +19,14 @@ class RegisterForm(forms.Form):
         first_name = self.cleaned_data.get('first_name')
 
         if len(first_name) > 30:
-            raise forms.ValidationError(_('Firt name is too long. Please '
-                                           'enter maximum 30 characters.'))
+            raise forms.ValidationError(_('Ensure this value has at most 30 characters'))
         return first_name
 
     def clean_last_name(self):
         last_name = self.cleaned_data.get('last_name')
 
         if len(last_name) > 30:
-            raise forms.ValidationError(_('Last name is too long. Please '
-                                           'enter maximum 30 characters.'))
+            raise forms.ValidationError(_('Ensure this value has at most 30 characters'))
         return last_name
 
     def clean_email(self):
@@ -98,6 +96,25 @@ class LoginForm(forms.Form):
         return username
 
 class UserForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
+
+    def clean_first_name(self):
+        first_name = self.cleaned_data.get('first_name')
+
+        if len(first_name) > 30:
+            raise forms.ValidationError(_('Ensure this value has at most 30 characters'))
+        return first_name
+
+    def clean_last_name(self):
+        last_name = self.cleaned_data.get('last_name')
+
+        if len(last_name) > 30:
+            raise forms.ValidationError(_('Ensure this value has at most 30 characters'))
+        return last_name
+
     class Meta:
         model = User
         fields = ('first_name', 'last_name')
@@ -168,6 +185,10 @@ class PasswordForm(forms.ModelForm):
 
 
 class EmailForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(EmailForm, self).__init__(*args, **kwargs)
+        self.fields['email'].required = True
+
     password = forms.CharField(
                     widget=PasswordInput(),
                     label=_('Current Password')
@@ -177,6 +198,8 @@ class EmailForm(forms.ModelForm):
         email = self.cleaned_data.get("email")
         email_msg = "Email address already using by another user!"
         
+        if self.instance.email == email:
+            raise forms.ValidationError(_("Please enter a new email address"))
         # search email on User table
         if email and User.objects.filter(email=email):
             raise forms.ValidationError(_(email_msg))
