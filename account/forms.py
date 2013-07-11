@@ -15,12 +15,40 @@ class RegisterForm(forms.Form):
     password2 = forms.CharField(label=_("Password (Confirm)"),
                                 widget=forms.PasswordInput)
 
+    def clean_first_name(self):
+        first_name = self.cleaned_data.get('first_name')
+
+        if len(first_name) > 30:
+            raise forms.ValidationError(_('Firt name is too long. Please '
+                                           'enter maximum 30 characters.'))
+        return first_name
+
+    def clean_last_name(self):
+        last_name = self.cleaned_data.get('last_name')
+
+        if len(last_name) > 30:
+            raise forms.ValidationError(_('Last name is too long. Please '
+                                           'enter maximum 30 characters.'))
+        return last_name
+
     def clean_email(self):
         email = self.cleaned_data.get('email')
         username = self.cleaned_data.get('username')
+        if len(email) > 75:
+            raise forms.ValidationError(_('Email address too long. '
+                                           'Please enter maximum 75 characters.'))
         if email and User.objects.filter(email=email).exclude(username=username).count():
-            raise forms.ValidationError(u_('Email addresses already exists.'))
+            raise forms.ValidationError(_('Email addresses already exists.'))
         return email
+
+    def clean_password2(self):
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+        
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError(_('The passwords are not the same'))
+        
+        return password2
 
     def save(self, profile_callback=None):
         username = User.objects.make_random_password() * 3
