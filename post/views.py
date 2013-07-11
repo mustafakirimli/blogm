@@ -81,7 +81,7 @@ def detail(request, post_id):
     initial = {"parent_id":post_id, 
                "comment_type":post_type.id
                }
-    form = CommentForm(initial=initial)
+    form = CommentForm(request.user, initial=initial)
     
     return render(request, 'post/detail.html', {
         'post': post, 
