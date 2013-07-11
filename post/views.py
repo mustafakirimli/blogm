@@ -64,7 +64,7 @@ def edit_post(request, post_id):
         'form': form,
     })
 
-def detail(request, post_id):
+def detail(request, post_id, form=None):
     # get (active and approved) post or raise 404
     post = get_object_or_404(Post, 
                              pk=post_id, 
@@ -78,10 +78,11 @@ def detail(request, post_id):
 
     # new comment form
     post_type = ContentType.objects.get(app_label="post", model="post")
-    initial = {"parent_id":post_id, 
-               "comment_type":post_type.id
-               }
-    form = CommentForm(request.user, initial=initial)
+    initial = {"parent_id": post_id, "comment_type": post_type.id}
+
+    # if form is not None, this method calling from comment.views.add_comment
+    if not form:
+        form = CommentForm(request.user, initial=initial)
     
     return render(request, 'post/detail.html', {
         'post': post, 

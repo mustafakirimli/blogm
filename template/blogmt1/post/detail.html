@@ -3,6 +3,7 @@
 {% load app_tags %}
 
 {% block content %}
+  <!-- post start //-->
   <div class="post">
       <h1 class="text-center">{{post.name}}</h1>
       <p class="text-right post-date">{{ post.created_at|date:'d M Y' }}</p>
@@ -13,8 +14,9 @@
       <p class="">{% autoescape off %}{{post.content}}{% endautoescape %}</p>  
   </div>
   <hr/>
+  <!-- post end //-->
   
-
+  <!-- comment start //-->
   <div class="comments">
   {% if comments %}
   <h4><i class="icon-comment"></i>  {{ comments.count }} Comment</h4>
@@ -29,7 +31,7 @@
         <div>
           <span><b>{{ comment.fullname }}</b></span>
           <span style="float: right">
-            <a class="reply" data-id="{{ comment.id }}" href=""><small>Reply</small></a>
+            <a class="reply" data-id="{{ comment.id }}" href="#"><small>Reply</small></a>
           </span>
           <br/>
           <span><small>{{ comment.created_at|date:'Y-m-d H:i' }}</small></span>
@@ -39,8 +41,21 @@
     </div>
   {% endfor %}
   </div>
+  <!-- comment end //-->
 
+  <!-- comment form start //-->
   {% url add_comment as action%}
-  {% include "block/form.html" with action=action legend="Write Comment" submit="Send Comment" %}
+  {% include "block/form.html" with action=action legend="Write Comment" submit="Send Comment" autofocus="on" %}
   <hr>
+  <!-- comment form end //-->
 {% endblock %}
+
+{% block js %}<script>
+  jQuery("a.reply").click(function(e){
+    var reply_id = jQuery(this).data("id")
+    jQuery("#id_reply_id").val(reply_id)
+    location.hash = ""
+    location.hash = "form_{{ form|get_hash }}"
+    return false
+  })
+</script>{% endblock %} 
