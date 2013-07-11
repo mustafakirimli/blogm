@@ -1,8 +1,10 @@
 {% load i18n %}
+{% load app_tags %}
 
 <form class="form-horizontal" action="{{ action }}" method="post" {%if form.is_multipart%}enctype="multipart/form-data"{% endif %}>
     <fieldset>
     <div id="legend">
+      <a name="form_{{form|get_hash}}"></a>
       <legend class="">{% trans legend %}</legend>
     </div>
     {# Include the hidden fields in the form #}
@@ -42,3 +44,9 @@
     </div>
   </fieldset>
 </form>
+
+{% if autofocus and form.errors or messages %}
+  <script>
+    window.location.hash="form_{{form|get_hash}}";
+  </script>
+{% endif %}
