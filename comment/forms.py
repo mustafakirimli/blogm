@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django import forms
 from django.forms import CharField, Form
 from PIL import Image
-from django.contrib.contenttypes.models import ContentType
 
 from comment.models import Comment
 
@@ -38,10 +37,10 @@ class CommentForm(forms.ModelForm):
     def save(self, commit=True):
         reply_id = self.cleaned_data.get("reply_id")
         if reply_id:
-            comment_type = ContentType.objects.get(app_label="comment", model="comment")
+            comment_type = Comment.type_comment
             parent_id = reply_id
         else:
-            comment_type = ContentType.objects.get(app_label="post", model="post")
+            comment_type = Comment.type_post
             parent_id = self.cleaned_data["parent_id"]
         
         instance = super(CommentForm, self).save(commit=False)

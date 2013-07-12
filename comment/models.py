@@ -24,12 +24,13 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True, blank=True)
 
+    type_comment = ContentType.objects.get(app_label="comment", model="comment")
+    type_post = ContentType.objects.get(app_label="post", model="post")
+
     def get_replies(self):
-        content_type = ContentType.objects.get(app_label="comment", model="comment")
-        comment_type_id = content_type.id
         return Comment.objects.filter(is_active=True, 
                                      is_approved=True, 
-                                     comment_type=comment_type_id,
+                                     comment_type=self.type_comment.id,
                                      parent_id=self.id)
 
     @task

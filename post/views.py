@@ -2,7 +2,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404, redirect, render
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import User
 
 from comment.forms import CommentForm
@@ -75,7 +74,7 @@ def detail(request, post_id, form=None):
     comments = post.get_comments()
 
     # new comment form
-    post_type = ContentType.objects.get(app_label="post", model="post")
+    post_type = Comment.type_post
     initial = {"parent_id": post_id, "comment_type": post_type.id}
 
     # if form is not None, this method calling from comment.views.add_comment

@@ -9,7 +9,6 @@ from django.contrib.sites.models import Site
 from django.core.mail import send_mail
 from django.template.loader import get_template 
 from django.template import Context
-from django.contrib.contenttypes.models import ContentType
 from comment.models import Comment
 
 class Post(models.Model):
@@ -37,7 +36,7 @@ class Post(models.Model):
         return posts
 
     def get_comments(self):
-        content_type = ContentType.objects.get(app_label="post", model="post")
+        content_type = Comment.type_post
         post_type_id = content_type.id
         return Comment.objects.filter(is_active=True, 
                                      is_approved=True, 
