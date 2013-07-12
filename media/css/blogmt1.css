@@ -102,6 +102,10 @@ body {
   margin: 5px 20px 20px 0px;
 }
 
+.post{
+  font-size: 1.2em;
+}
+
 .comments .comment .avatar{
   float: left;
   width: 94px;
@@ -114,11 +118,12 @@ body {
   margin: 5px;
   padding: 5px;
   border: 1px silver solid;
+  text-align: justify;
 }
 
 .comments .comment .content{
   margin-left: 110px;
-  font-size: 1.2em;
+  font-size: 1.1em;
 }
 
 .comments .comment .content p{
@@ -127,4 +132,8 @@ body {
 
 .reply{
   margin-left: 80px !important;
+}
+
+.justify{
+  text-align: justify;
 }
