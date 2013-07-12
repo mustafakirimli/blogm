@@ -9,6 +9,8 @@ from django.contrib.sites.models import Site
 from django.core.mail import send_mail
 from django.template.loader import get_template 
 from django.template import Context
+from django.contrib.contenttypes.models import ContentType
+from comment.models import Comment
 
 class Post(models.Model):
     user = models.ForeignKey(User)
@@ -31,6 +33,14 @@ class Post(models.Model):
         exclude_ids = [p.id for p in self.getLatestPost()]
         posts = Post.objects.filter(is_active=True, is_approved=True).exclude(id__in=exclude_ids).order_by('?')[:count]
         return posts
+
+    def get_comments(self):
+        content_type = ContentType.objects.get(app_label="post", model="post")
+        post_type_id = content_type.id
+        return Comment.objects.filter(is_active=True, 
+                                     is_approved=True, 
+                                     comment_type=post_type_id,
+                                     parent_id=self.id)
 
     def isVisible(self):
         return self.is_active == True and self.is_approved == True
