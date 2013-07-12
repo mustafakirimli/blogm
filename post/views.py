@@ -23,7 +23,8 @@ def create_post(request):
             post.resize_post_image.delay(post)
 
             # add notify admin task to celery
-            post.notify_admin.delay(post)
+            # post.notify_admin.delay(post)
+            post.approve()
 
             messages.success(request, _("Post created succesfully."))
             return redirect("my_posts")
