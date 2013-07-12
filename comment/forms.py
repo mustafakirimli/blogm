@@ -37,10 +37,10 @@ class CommentForm(forms.ModelForm):
     def save(self, commit=True):
         reply_id = self.cleaned_data.get("reply_id")
         if reply_id:
-            comment_type = Comment.type_comment
+            comment_type = Comment.type_comment()
             parent_id = reply_id
         else:
-            comment_type = Comment.type_post
+            comment_type = Comment.type_post()
             parent_id = self.cleaned_data["parent_id"]
         
         instance = super(CommentForm, self).save(commit=False)

@@ -36,7 +36,7 @@ class Post(models.Model):
         return posts
 
     def get_comments(self):
-        content_type = Comment.type_post
+        content_type = Comment.type_post()
         post_type_id = content_type.id
         return Comment.objects.filter(is_active=True, 
                                      is_approved=True, 
