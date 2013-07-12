@@ -16,6 +16,6 @@
       <br/>
       <span><small>{{ comment.created_at|date:'Y-m-d H:i' }}</small></span>
     </div>
-    <p>{{ comment.content }}</p>
+    <p>{{ comment.content|safe }}</p>
   </div>
 </div>
