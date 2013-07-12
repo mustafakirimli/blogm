@@ -72,9 +72,7 @@ def detail(request, post_id, form=None):
                              is_approved=True)
 
     # get (active and approved) post comments
-    comments = Comment.objects.filter(parent_id=post_id, 
-                                      is_active=True, 
-                                      is_approved=True)
+    comments = post.get_comments()
 
     # new comment form
     post_type = ContentType.objects.get(app_label="post", model="post")

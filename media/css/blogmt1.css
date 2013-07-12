@@ -124,3 +124,7 @@ body {
 .comments .comment .content p{
   margin-top: 3px;
 }
+
+.reply{
+  margin-left: 80px !important;
+}

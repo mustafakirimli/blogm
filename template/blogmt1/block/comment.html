@@ -1,0 +1,21 @@
+{% load i18n %}
+{% load app_tags %}
+
+<div class="comment">
+  <div class="avatar">
+    <img src="http://www.gravatar.com/avatar/{{ comment.email|md5 }}" />
+  </div>
+  <div class="content">
+    <div>
+      <span><b>{{ comment.fullname }}</b></span>
+      {% if not reply %}
+      <span style="float: right">
+        <a class="reply" data-id="{{ comment.id }}" href="#"><small>Reply</small></a>
+      </span>
+      {% endif %}
+      <br/>
+      <span><small>{{ comment.created_at|date:'Y-m-d H:i' }}</small></span>
+    </div>
+    <p>{{ comment.content }}</p>
+  </div>
+</div>
