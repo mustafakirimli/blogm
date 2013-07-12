@@ -24,17 +24,13 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True, blank=True)
 
-    def getActiveComments(self):
-        return Comment.object.filter(status=True, approved=True)
-
-    def getActiveUserComments(self, user_id):
-        return Comment.object.filter(status=True, approved=True, user_id=user_id)
-
-    def getActiveBlogComments(self):
-        return Comment.object.filter(status = True, approved=True, comment_type=models.Q(model='post'))
-
-    def getActiveCommentReplies(self):
-        return Comment.object.filter(status = True, approved=True, comment_type=models.Q(model='comment'))
+    def get_replies(self):
+        content_type = ContentType.objects.get(app_label="comment", model="comment")
+        comment_type_id = content_type.id
+        return Comment.objects.filter(is_active=True, 
+                                     is_approved=True, 
+                                     comment_type=comment_type_id,
+                                     parent_id=self.id)
 
 
     @task
