@@ -3,11 +3,11 @@
 
 {% block content %}
 {% blocktrans %}
-Hi Admin,
+Hi {{ comment.fullname }},
 
-please approve new comment:
+please approve your email address for your comment with below link:
 {% endblocktrans %}
 
-<a href="http://{{ site.domain }}{% url approve_comment comment.activation_key %}">{% trans "Approve Comment"%}</a>
+<a href="http://{{ site.domain }}{% url approve_comment comment.activation_key %}">{% trans "Approve"%}</a>
 
 {% endblock %}

@@ -32,13 +32,12 @@ class Comment(models.Model):
                                      comment_type=comment_type_id,
                                      parent_id=self.id)
 
-
     @task
-    def notify_admin(self):
+    def notify_user(self):
         site = Site.objects.get_current()
         # send email with template
         send_mail(
-            _('Please approve new comment!'),
+            _('Please approve email address for your comment!'),
             get_template('email/comment/approve_comment.html').render(
                 Context({
                     'site': site,
@@ -46,7 +45,7 @@ class Comment(models.Model):
                 })
             ),
             '',
-            settings.ADMINS,
+            [self.email,],
             fail_silently = True
         )
         return True

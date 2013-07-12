@@ -16,7 +16,7 @@ def add_comment(request):
             if request.user.is_authenticated():
                 comment.approve()
             else:
-                comment.notify_admin.delay(comment)
+                comment.notify_user.delay(comment)
             messages.success(request, _("Comment created succesfully."))
             return redirect("post_detail", post_id=post_id)
         return detail(request, post_id, form=form)
