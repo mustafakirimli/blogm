@@ -2,6 +2,8 @@
 {% load i18n %}
 {% load app_tags %}
 
+{% block title %}{{ post.title }}{% endblock %}
+
 {% block content %}
   <!-- post start //-->
   <div class="post">
@@ -11,7 +13,7 @@
       {% if post.image %}
       <img class="pimg" src="{{ MEDIA_URL }}{{post.image}}" width="200" heigth=""/>
       {% endif %}
-      <p class="">{% autoescape off %}{{post.content}}{% endautoescape %}</p>  
+      <p class="">{{post.content|safe}}</p>  
   </div>
   <hr/>
   <!-- post end //-->
