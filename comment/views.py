@@ -13,7 +13,10 @@ def add_comment(request):
         form = CommentForm(request.user, request.POST)
         if form.is_valid():
             comment = form.save()
-            comment.notify_admin.delay(comment)
+            if request.user.is_authenticated():
+                comment.approve()
+            else:
+                comment.notify_admin.delay(comment)
             messages.success(request, _("Comment created succesfully."))
             return redirect("post_detail", post_id=post_id)
         return detail(request, post_id, form=form)
