@@ -51,11 +51,26 @@
 {% endblock %}
 
 {% block js %}<script>
+  reply_mode_text = '{% trans "Write Comment Reply" %} (<small><a id="cancel_reply" href="#">{% trans "Cancel Reply Mode" %}</a></small>)'
+  reply_id_el = jQuery("#id_reply_id")
+  legend = reply_id_el.closest("form").find("legend")
+  legend_default = legend.html()
+  if(reply_id_el.val() != "")
+    legend.html(reply_mode_text)
+
   jQuery("a.reply").click(function(e){
+    e.preventDefault()
+    legend.html(reply_mode_text)
     var reply_id = jQuery(this).data("id")
-    jQuery("#id_reply_id").val(reply_id)
+    reply_id_el.val(reply_id)
     location.hash = ""
     location.hash = "form_{{ form|get_hash }}"
-    return false
+  })
+
+  legend.on("click", "#cancel_reply", function(e){
+    e.preventDefault()
+    legend.html(legend_default)
+    reply_id_el.val("")
+    return false;
   })
 </script>{% endblock %} 
