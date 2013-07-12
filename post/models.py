@@ -25,12 +25,14 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True,blank=True)
 
-    def getLatestPost(self, count=3):
+    @staticmethod
+    def get_latest_post(count=3):
         posts = Post.objects.filter(is_active=True, is_approved=True).order_by("-id")[:count]
         return posts
 
-    def getMainPost(self, count=1):
-        exclude_ids = [p.id for p in self.getLatestPost()]
+    @staticmethod
+    def get_main_post(count=1):
+        exclude_ids = [p.id for p in Post.get_latest_post()]
         posts = Post.objects.filter(is_active=True, is_approved=True).exclude(id__in=exclude_ids).order_by('?')[:count]
         return posts
 
@@ -42,7 +44,7 @@ class Post(models.Model):
                                      comment_type=post_type_id,
                                      parent_id=self.id)
 
-    def isVisible(self):
+    def is_visible(self):
         return self.is_active == True and self.is_approved == True
 
     @task
