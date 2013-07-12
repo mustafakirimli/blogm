@@ -41,7 +41,8 @@ class Post(models.Model):
         return Comment.objects.filter(is_active=True, 
                                      is_approved=True, 
                                      comment_type=post_type_id,
-                                     parent_id=self.id)
+                                     parent_id=self.id
+                                ).order_by("id")
 
     def is_visible(self):
         return self.is_active == True and self.is_approved == True

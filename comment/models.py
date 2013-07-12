@@ -36,7 +36,8 @@ class Comment(models.Model):
         return Comment.objects.filter(is_active=True, 
                                      is_approved=True, 
                                      comment_type=self.type_comment().id,
-                                     parent_id=self.id)
+                                     parent_id=self.id
+                               ).order_by("id")
 
     @task
     def notify_user(self):
