@@ -50,27 +50,51 @@
   <!-- comment form end //-->
 {% endblock %}
 
-{% block js %}<script>
-  reply_mode_text = '{% trans "Write Comment Reply" %} (<small><a id="cancel_reply" href="#">{% trans "Cancel Reply Mode" %}</a></small>)'
+{% block js %}
+<script>
+  /* reply mode text for legend */
+  reply_mode_text = '{% trans "Write Comment Reply" %} '
+                   +'(<small><a id="cancel_reply" href="#">'
+                   +'{% trans "Cancel Reply Mode" %}</a></small>)'
+
+  /* reply_id input */
   reply_id_el = jQuery("#id_reply_id")
+  
+  /* form legend */
   legend = reply_id_el.closest("form").find("legend")
+
+  /* default legend text */
   legend_default = legend.html()
+
+  /* if server returns form error, set reply mode text to legend */
   if(reply_id_el.val() != "")
     legend.html(reply_mode_text)
 
   jQuery("a.reply").click(function(e){
+    /* don't act like a click action :) */
     e.preventDefault()
+
+    /* reply legend text to reply mode */
     legend.html(reply_mode_text)
+
+    /* set reply_id input value with comment id */
     var reply_id = jQuery(this).data("id")
     reply_id_el.val(reply_id)
+
+    /* change location hash for form focus */
     location.hash = ""
     location.hash = "form_{{ form|get_hash }}"
   })
 
   legend.on("click", "#cancel_reply", function(e){
+    /* don't act like a click action :) */
     e.preventDefault()
+
+    /* set legend text to default (comment mode) */
     legend.html(legend_default)
+
+    /* clear form reply_id input's value */
     reply_id_el.val("")
-    return false;
   })
-</script>{% endblock %} 
+</script>
+{% endblock %} 
