@@ -36,7 +36,7 @@ class RegisterForm(forms.Form):
         if len(email) > 75:
             raise forms.ValidationError(_('Email address too long. '
                                            'Please enter maximum 75 characters.'))
-        if email and User.objects.filter(email=email).exclude(username=username).count():
+        if email and User.objects.filter(email=email).count():
             raise forms.ValidationError(_('Email addresses already exists.'))
         return email
 
