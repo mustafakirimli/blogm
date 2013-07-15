@@ -8,14 +8,20 @@
   <div class="content">
     <div>
       <span><b>{{ comment.fullname }}</b></span>
-      {% if not reply %}
       <span style="float: right">
         <a class="reply" data-id="{{ comment.id }}" href="#"><small>Reply</small></a>
       </span>
-      {% endif %}
       <br/>
       <span><small>{{ comment.created_at|date:'Y-m-d H:i' }}</small></span>
     </div>
     <p>{{ comment.content|safe }}</p>
   </div>
 </div>
+
+{%if comment.id|get_replies %}
+    {%for c in comment.id|get_replies %}
+        {%with comment=c template_name="block/comment.html" %}
+            <div class="reply">{%include template_name%}</div>
+        {%endwith%}
+    {%endfor%}
+{%endif%}

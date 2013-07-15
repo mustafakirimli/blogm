@@ -26,12 +26,7 @@
   {% endif %}
   {% for comment in comments %}
     {% include "block/comment.html" %}
-        {% for c in comment.id|get_replies %}
-            <div class="reply">
-            {% include "block/comment.html" with comment=c reply="reply" %}
-            </div>
-        {% endfor %}
-    {% endfor %}
+  {% endfor %}
   </div>
   <!-- comment end //-->
 

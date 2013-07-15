@@ -25,4 +25,4 @@ def get_replies(value):
         return replies
     except Exception, e:
         print e
-        return None
+    return False
