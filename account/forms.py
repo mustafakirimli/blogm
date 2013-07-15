@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django import forms
 from django.forms import CharField, Form, PasswordInput
 from PIL import Image
+from django.contrib.auth import authenticate
 
 from account.models import UserProfile,EmailChange
 
@@ -94,6 +95,14 @@ class LoginForm(forms.Form):
             deactive_msg = 'Not activated account! Please activate your account'
             raise forms.ValidationError(_(deactive_msg))
         return username
+
+    def clean(self):
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+        user = authenticate(username=username, password=password)
+        if not user:
+            raise forms.ValidationError(_("Invalid email/password"))
+        return self.cleaned_data
 
 class UserForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

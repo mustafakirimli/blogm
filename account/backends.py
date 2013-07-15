@@ -12,7 +12,8 @@ class EmailAuthBackend(object):
             if user.check_password(password):
                 return user
         except User.DoesNotExist:
-            return None 
+            return None
+        return None
 
     def get_user(self, user_id):
         """ Get a User object from the user_id. """
