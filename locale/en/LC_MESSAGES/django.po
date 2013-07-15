@@ -2,7 +2,7 @@
 msgid "E-mail"
 msgstr ""
 
-#: account/forms.py:13 account/forms.py:52
+#: account/forms.py:13 account/forms.py:78
 msgid "Password"
 msgstr ""
 
@@ -10,39 +10,60 @@ msgstr ""
 msgid "Password (Confirm)"
 msgstr ""
 
+#: account/forms.py:22 account/forms.py:29 account/forms.py:108
+#: account/forms.py:115
+msgid "Ensure this value has at most 30 characters"
+msgstr ""
+
+#: account/forms.py:36 account/forms.py:202
+msgid "Email address too long. Please enter maximum 75 characters."
+msgstr ""
+
+#: account/forms.py:39
+msgid "Email addresses already exists."
+msgstr ""
+
 #: account/forms.py:47
+msgid "The passwords are not the same"
+msgstr ""
+
+#: account/forms.py:73
 msgid "Username"
 msgstr ""
 
-#: account/forms.py:48
+#: account/forms.py:74
 msgid "Username can contain any letters or numbers, without spaces"
 msgstr ""
 
-#: account/forms.py:62
+#: account/forms.py:88
 msgid "Invalid email/password"
 msgstr ""
 
-#: account/forms.py:111 account/forms.py:145
+#: account/forms.py:156 account/forms.py:194
 msgid "Current Password"
 msgstr ""
 
-#: account/forms.py:113
+#: account/forms.py:158
 msgid "New Password"
 msgstr ""
 
-#: account/forms.py:115
+#: account/forms.py:160
 msgid "New Password (again)"
 msgstr ""
 
-#: account/forms.py:120
+#: account/forms.py:165
 msgid "Please type your current password."
 msgstr ""
 
-#: account/forms.py:128
+#: account/forms.py:173
 msgid "The new passwords are not the same"
 msgstr ""
 
-#: account/forms.py:164
+#: account/forms.py:205
+msgid "Please enter a new email address"
+msgstr ""
+
+#: account/forms.py:218
 msgid "Please type your current password"
 msgstr ""
 
@@ -94,43 +115,47 @@ msgstr ""
 msgid "Thanks for signing up!"
 msgstr ""
 
-#: comment/models.py:45
-msgid "Please approve new comment!"
+#: comment/forms.py:28 comment/forms.py:34
+msgid "Ensure this value has at most 100 characters"
 msgstr ""
 
-#: comment/views.py:23
+#: comment/models.py:47
+msgid "Please approve email address for your comment!"
+msgstr ""
+
+#: comment/views.py:20
 msgid "Comment created succesfully."
 msgstr ""
 
-#: comment/views.py:33
+#: comment/views.py:31
 msgid "Comment approved."
 msgstr ""
 
-#: comment/views.py:35
+#: comment/views.py:33
 msgid "Comment approve problem!"
 msgstr ""
 
-#: post/models.py:19
+#: post/models.py:20
 msgid "Post Image"
 msgstr ""
 
-#: post/models.py:62
+#: post/models.py:74
 msgid "Please approve new post!"
 msgstr ""
 
-#: post/views.py:26
+#: post/views.py:29
 msgid "Post created succesfully."
 msgstr ""
 
-#: post/views.py:49
+#: post/views.py:58
 msgid "Post updated succesfully."
 msgstr ""
 
-#: post/views.py:90
+#: post/views.py:98
 msgid "Post approved."
 msgstr ""
 
-#: post/views.py:92
+#: post/views.py:100
 msgid "Post approve problem!"
 msgstr ""
 
@@ -307,15 +332,16 @@ msgid "Activate Email"
 msgstr ""
 
 #: template/blogmt1/email/comment/approve_comment.html:5
+#, python-format
 msgid ""
 "\n"
-"Hi Admin,\n"
+"Hi %(comment.fullname)s,\n"
 "\n"
-"please approve new comment:\n"
+"please approve your email address for your comment with below link:\n"
 msgstr ""
 
 #: template/blogmt1/email/comment/approve_comment.html:11
-msgid "Approve Comment"
+msgid "Approve"
 msgstr ""
 
 #: template/blogmt1/email/post/approve_post.html:5
@@ -328,4 +354,12 @@ msgstr ""
 
 #: template/blogmt1/email/post/approve_post.html:11
 msgid "Approve Post"
+msgstr ""
+
+#: template/blogmt1/post/detail.html:43
+msgid "Write Comment Reply"
+msgstr ""
+
+#: template/blogmt1/post/detail.html:45
+msgid "Cancel Reply Mode"
 msgstr ""
