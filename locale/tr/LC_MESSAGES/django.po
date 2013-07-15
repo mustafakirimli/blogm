@@ -177,7 +177,7 @@ msgid ""
 "      "
 msgstr ""
 
-#: template/blogmt1/404.html:22 template/blogmt1/500.html:18
+#: template/blogmt1/404.html:22 template/blogmt1/500.html:22
 msgid "Take Me Home"
 msgstr ""
 
@@ -191,6 +191,16 @@ msgstr ""
 
 #: template/blogmt1/500.html:14
 msgid "Error 500"
+msgstr ""
+
+#: template/blogmt1/500.html:17
+msgid ""
+"\n"
+"      The page you requested could not be processed, either contact your "
+"webmaster or try again. Use your browsers <b>Back</b> button to navigate to "
+"the page you have prevously come from</p>\n"
+"      <p><b>Or you could just press this neat little button:</b>\n"
+"      "
 msgstr ""
 
 #: template/blogmt1/home.html:13
