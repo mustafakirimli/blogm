@@ -280,6 +280,17 @@
     },
     {
         "pk": 1,
+        "model": "account.userprofile",
+        "fields": {
+            "gender": null,
+            "activation_key": null,
+            "user": 1,
+            "image": "",
+            "is_approved": true
+        }
+    },
+    {
+        "pk": 1,
         "model": "sites.site",
         "fields": {
             "domain": "127.0.0.1:8000",
