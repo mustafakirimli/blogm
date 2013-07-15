@@ -281,7 +281,7 @@ msgid "All Posts"
 msgstr ""
 
 #: template/blogmt1/base/page.html:39
-msgid "Most Popular"
+msgid "Crash It!"
 msgstr ""
 
 #: template/blogmt1/base/page.html:40

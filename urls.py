@@ -28,6 +28,8 @@ urlpatterns = patterns('',
     # account app
     url(r'^account/', include('blogm.account.urls')),
 
+    url(r'^wrong/', 'blogm.views.wrong', name='wrong'),
+
     # media requests
     url(r'^media/(?P<path>.*)$',
          "django.views.static.serve",

@@ -6,3 +6,6 @@ def home(request):
     #TODO: check count
     main_post = Post.get_main_post()[0] if Post.get_main_post() else None
     return render(request, 'home.html', {'latest_posts': latest_posts, 'main_post': main_post})
+
+def wrong(request):
+	pass

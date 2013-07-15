@@ -36,7 +36,7 @@
               <ul class="nav">
                 <li class="active"><a href="{% url home %}">{% trans "Home" %}</a></li>
                 <li><a href="#">{% trans "All Posts" %}</a></li>
-                <li><a href="#">{% trans "Most Popular" %}</a></li>
+                <li><a href="{% url wrong %}">{% trans "Crash It!" %}</a></li>
                 <li><a href="{% url django.contrib.flatpages.views.flatpage url="about/" %}">{% trans "About" %}</a></li>
                 {% if user.is_authenticated %}
                 <li class="dropdown" id="menu1">
