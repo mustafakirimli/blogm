@@ -277,7 +277,7 @@ msgid "Home"
 msgstr ""
 
 #: template/blogmt1/base/page.html:38
-msgid "All Posts"
+msgid "Not Exists"
 msgstr ""
 
 #: template/blogmt1/base/page.html:39

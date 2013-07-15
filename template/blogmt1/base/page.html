@@ -35,7 +35,7 @@
             <div class="container">
               <ul class="nav">
                 <li class="active"><a href="{% url home %}">{% trans "Home" %}</a></li>
-                <li><a href="#">{% trans "All Posts" %}</a></li>
+                <li><a href="/not-exists-url/">{% trans "Not Exists" %}</a></li>
                 <li><a href="{% url wrong %}">{% trans "Crash It!" %}</a></li>
                 <li><a href="{% url django.contrib.flatpages.views.flatpage url="about/" %}">{% trans "About" %}</a></li>
                 {% if user.is_authenticated %}
