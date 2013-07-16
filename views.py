@@ -4,7 +4,9 @@ from django.core.cache import cache
 from post.models import Post
 
 def home(request):
-	#TODO: objeler cachenebilir
+	"""
+    Homepage view getting latest 3 post and main post and rendering html
+    """
    	
    	# get latest 3 posts from cache
     latest_posts = cache.get('latest_posts')
@@ -35,4 +37,7 @@ def home(request):
     })
 
 def wrong(request):
+    """
+    This method testing for 404 error page
+    """
 	pass
