@@ -9,7 +9,7 @@
     </div>
     {% endif %}
 
-    {% url change_email as action%}
+    {% url change_email as action %}
     {% include "block/form.html" with action=action legend="Change Email" submit="Update Email" %}
     <hr>
 {% endblock %}

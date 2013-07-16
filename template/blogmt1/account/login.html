@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-  {% url login as action%}
+  {% url login as action %}
   {% include "block/form.html" with action=action legend="Login" submit="Login" %}
   <hr>  
 {% endblock %}

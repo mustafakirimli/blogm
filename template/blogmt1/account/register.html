@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-  {% url register as action%}
+  {% url register as action %}
   {% include "block/form.html" with action=action legend="Register" submit="Register" %}
   <hr>  
 {% endblock %}

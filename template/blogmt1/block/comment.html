@@ -18,10 +18,10 @@
   </div>
 </div>
 
-{%if comment.id|get_replies %}
-    {%for c in comment.id|get_replies %}
-        {%with comment=c template_name="block/comment.html" %}
-            <div class="reply">{%include template_name%}</div>
-        {%endwith%}
-    {%endfor%}
-{%endif%}
+{% if comment.id|get_replies %}
+    {% for c in comment.id|get_replies %}
+        {% with comment=c template_name="block/comment.html" %}
+            <div class="reply">{% include template_name %}</div>
+        {% endwith %}
+    {% endfor %}
+{% endif %}

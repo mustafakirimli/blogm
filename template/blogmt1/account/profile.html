@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-    {% url update_profile as action%}
+    {% url update_profile as action %}
     {% include "block/form.html" with action=action legend="Update Profile" submit="Update Profile" %}
     <hr>
 {% endblock %}
