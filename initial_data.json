@@ -19,7 +19,6 @@
         "model": "post.post",
         "fields": {
             "is_approved": true,
-            "activation_key": "Ukza8rsSbB",
             "description": "Lorem Ipsum, dizgi ve bask\u0131 end\u00fcstrisinde kullan\u0131lan m\u0131g\u0131r metinlerdir. Lorem Ipsum, ad\u0131 bilinmeyen bir matbaac\u0131n\u0131n  bir hurufat numune kitab\u0131 olu\u015fturmak \u00fczere bir yaz\u0131 galerisini alarak kar\u0131\u015ft\u0131rd\u0131\u011f\u0131 1500'lerden beri end\u00fcstri standard\u0131 saht...",
             "title": "Lorem ipsum dolor sit amet [tr]",
             "image": "",
@@ -36,7 +35,6 @@
         "model": "post.post",
         "fields": {
             "is_approved": true,
-            "activation_key": "gudwu2ZfJs",
             "description": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno est\u00e1ndar de las industrias desde el a\u00f1o 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) de...",
             "title": "Lorem ipsum dolor sit amet [es]",
             "image": "",
@@ -53,7 +51,6 @@
         "model": "post.post",
         "fields": {
             "is_approved": true,
-            "activation_key": "Jk5wjP2m5t",
             "description": "Le Lorem Ipsum est simplement du faux texte employ\u00e9 dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les ann\u00e9es 1500, quand un peintre anonyme assembla ensemble des mo...",
             "title": "Lorem ipsum dolor sit amet [fr]",
             "image": "",
@@ -70,7 +67,6 @@
         "model": "post.post",
         "fields": {
             "is_approved": true,
-            "activation_key": "FHMAuHYThU",
             "description": "Lorem Ipsum ist ein einfacher Demo-Text f\u00fcr die Print- und Schriftindustrie. Lorem Ipsum ist in der Industrie bereits der Standard Demo-Text seit 1500, als ein unbekannter Schriftsteller eine Hand voll W\u00f6rter nahm und diese durcheinander wa...",
             "title": "Lorem ipsum dolor sit amet [de]",
             "image": "",
@@ -87,7 +83,6 @@
         "model": "post.post",
         "fields": {
             "is_approved": true,
-            "activation_key": "HGc6xGY38e",
             "description": "Lorem Ipsum \u00e8 un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum \u00e8 considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li ass...",
             "title": "Lorem ipsum dolor sit amet [it]",
             "image": "",
@@ -104,7 +99,6 @@
         "model": "post.post",
         "fields": {
             "is_approved": true,
-            "activation_key": "LG2CuRd2se",
             "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen ...",
             "title": "Lorem ipsum dolor sit amet [en]",
             "image": "",
@@ -126,10 +120,11 @@
             "created_at": "2013-07-12 15:57:10",
             "is_active": true,
             "updated_at": null,
+            "email": "mustafa.kirimli@markafoni.com",
             "content": "Compared to 30 years ago, NC is a sad place today. The only growth industry we have are Walmarts and Dollar Stores selling cheap Chinese cr@p. Bad unemployment-the textile, furniture, and tobacco industries are long gone. Terrible schools, 45th in the US. Terrible pay for teachers. Virtually no care for the mentally ill, they are housed in the jails without treatment. But we do have a great system of interstate highways thanks to Jesse Helms, so NC is a state you drive thru-quickly- to get somewhere else. NYC or DC to Atlanta or Florida.",
             "parent_id": 1,
-            "fullname": "Mustafa K\u0131r\u0131ml\u0131",
-            "email": "mustafa.kirimli@markafoni.com"
+            "post": 1,
+            "fullname": "Mustafa K\u0131r\u0131ml\u0131"
         }
     },
     {
@@ -142,10 +137,11 @@
             "created_at": "2013-07-12 15:57:36",
             "is_active": true,
             "updated_at": null,
+            "email": "mustafa.kirimli@markafoni.com",
             "content": "Once again the fools are hard at work deciding what people need even though the people don't want what they are giving? They don't listen to their voters, so how in blazes did they get in office? Women need to run for office, and women need to vote and just take over the government. Clearly these men are not men they are too concerned with what they think women want.\r\n<br/>\r\nWhat a waste of money, these jerks will get voted out soon, and then they have to go back and change the law.",
             "parent_id": 1,
-            "fullname": "Mustafa K\u0131r\u0131ml\u0131",
-            "email": "mustafa.kirimli@markafoni.com"
+            "post": 1,
+            "fullname": "Mustafa K\u0131r\u0131ml\u0131"
         }
     },
     {
@@ -158,26 +154,11 @@
             "created_at": "2013-07-12 15:58:34",
             "is_active": true,
             "updated_at": null,
+            "email": "mustafa.kirimli@markafoni.com",
             "content": "We need the light to shine on these lying legislators. Women's health indeed, if anything this bill will imperil women's health. \r\n<br/></br>\r\nMy beautiful state has gone from the most progressive state in the south to the most REGRESSIVE state in the south. Things are looking up for you Mississippi, you have been elevated.",
             "parent_id": 1,
-            "fullname": "Mustafa K\u0131r\u0131ml\u0131",
-            "email": "mustafa.kirimli@markafoni.com"
-        }
-    },
-    {
-        "pk": 4,
-        "model": "comment.comment",
-        "fields": {
-            "activation_key": "GqNwPxsWBf",
-            "is_approved": true,
-            "comment_type": 21,
-            "created_at": "2013-07-12 15:59:36",
-            "is_active": true,
-            "updated_at": null,
-            "content": "The reasons many men give for having anything to say about women having an abortion are mostly silent after conception. While many men shirk and squander their support responsibilities with billions lost in court fees, child welfare services, and neglected children, along with whiney anti-abortion advocates who wouldn't dream of adopting an unwanted child, or constantly demand their politicians defund child welfare programs, child education programs, child social well-being programs and psychiatric care....etc.",
-            "parent_id": 3,
-            "fullname": "Mustafa K\u0131r\u0131ml\u0131",
-            "email": "mustafa.kirimli@markafoni.com"
+            "post": 1,
+            "fullname": "Mustafa K\u0131r\u0131ml\u0131"
         }
     },
     {
@@ -190,10 +171,11 @@
             "created_at": "2013-07-12 16:00:40",
             "is_active": true,
             "updated_at": null,
+            "email": "mustafa.kirimli@markafoni.com",
             "content": "Ironically, after years of prohibition, Ireland, one of the most religious countries in the world, is set to allow the option of abortion, and here in the US, the \"Land of the Free,\" GOP lawmakers are using underhanded tactics to strip away rights. As the rest of the world is coming out of the Dark Ages, it seems some in America prefer to regress into it.",
             "parent_id": 2,
-            "fullname": "Mustafa K\u0131r\u0131ml\u0131",
-            "email": "mustafa.kirimli@markafoni.com"
+            "post": 2,
+            "fullname": "Mustafa K\u0131r\u0131ml\u0131"
         }
     },
     {
@@ -206,10 +188,11 @@
             "created_at": "2013-07-12 16:01:01",
             "is_active": true,
             "updated_at": null,
+            "email": "mustafa.kirimli@markafoni.com",
             "content": "We need the light to shine on these lying legislators. Women's health indeed, if anything this bill will imperil women's health. \r\n<br/><br/>\r\nMy beautiful state has gone from the most progressive state in the south to the most REGRESSIVE state in the south. Things are looking up for you Mississippi, you have been elevated.",
             "parent_id": 5,
-            "fullname": "Mustafa K\u0131r\u0131ml\u0131",
-            "email": "mustafa.kirimli@markafoni.com"
+            "post": 2,
+            "fullname": "Mustafa K\u0131r\u0131ml\u0131"
         }
     },
     {
@@ -222,10 +205,11 @@
             "created_at": "2013-07-12 16:01:56",
             "is_active": true,
             "updated_at": null,
+            "email": "kirimlimustafa@gmail.com",
             "content": "People beware this GOP mentality. Pay attention to who is really trying to take away your rights instead of listening to them trying to lead you off course with their lies.\r\n",
             "parent_id": 2,
-            "fullname": "Mustafa KIRIMLI",
-            "email": "kirimlimustafa@gmail.com"
+            "post": 2,
+            "fullname": "Mustafa KIRIMLI"
         }
     },
     {
@@ -238,10 +222,11 @@
             "created_at": "2013-07-12 16:04:30",
             "is_active": true,
             "updated_at": null,
+            "email": "johndoe@gmail.com",
             "content": "what can i do sometimes on the blog",
             "parent_id": 2,
-            "fullname": "John Doe",
-            "email": "johndoe@gmail.com"
+            "post": 2,
+            "fullname": "John Doe"
         }
     },
     {
@@ -254,10 +239,28 @@
             "created_at": "2013-07-12 16:05:35",
             "is_active": true,
             "updated_at": null,
+            "email": "ahmetay@mail.com",
             "content": "Lorem Ipsum \u10e1\u10d0\u10d1\u10d4\u10ed\u10d3\u10d8 \u10d3\u10d0 \u10e2\u10d8\u10de\u10dd\u10d2\u10e0\u10d0\u10e4\u10d8\u10e3\u10da\u10d8 \u10d8\u10dc\u10d3\u10e3\u10e1\u10e2\u10e0\u10d8\u10d8\u10e1 \u10e3\u10e8\u10d8\u10dc\u10d0\u10d0\u10e0\u10e1\u10dd \u10e2\u10d4\u10e5\u10e1\u10e2\u10d8\u10d0. \u10d8\u10d2\u10d8 \u10e1\u10e2\u10d0\u10dc\u10d3\u10d0\u10e0\u10e2\u10d0\u10d3 1500-\u10d8\u10d0\u10dc\u10d8 \u10ec\u10da\u10d4\u10d1\u10d8\u10d3\u10d0\u10dc \u10d8\u10e5\u10ea\u10d0, \u10e0\u10dd\u10d3\u10d4\u10e1\u10d0\u10ea \u10e3\u10ea\u10dc\u10dd\u10d1\u10db\u10d0 \u10db\u10d1\u10d4\u10ed\u10d3\u10d0\u10d5\u10db\u10d0 \u10d0\u10db\u10ec\u10e7\u10dd\u10d1 \u10d3\u10d0\u10d6\u10d2\u10d0\u10d6\u10d4 \u10ec\u10d8\u10d2\u10dc\u10d8\u10e1 \u10e1\u10d0\u10ea\u10d3\u10d4\u10da\u10d8 \u10d4\u10d2\u10d6\u10d4\u10db\u10de\u10da\u10d0\u10e0\u10d8 \u10d3\u10d0\u10d1\u10d4\u10ed\u10d3\u10d0. \u10db\u10d8\u10e1\u10d8 \u10e2\u10d4\u10e5\u10e1\u10e2\u10d8 \u10d0\u10e0\u10d0\u10db\u10d0\u10e0\u10e2\u10dd 5 \u10e1\u10d0\u10e3\u10d9\u10e3\u10dc\u10d8\u10e1 \u10db\u10d0\u10dc\u10eb\u10d8\u10da\u10d6\u10d4 \u10e8\u10d4\u10db\u10dd\u10e0\u10e9\u10d0, \u10d0\u10e0\u10d0\u10db\u10d4\u10d3 \u10db\u10d0\u10dc \u10d3\u10e6\u10d4\u10db\u10d3\u10d4, \u10d4\u10da\u10d4\u10e5\u10e2\u10e0\u10dd\u10dc\u10e3\u10da\u10d8 \u10e2\u10d8\u10de\u10dd\u10d2\u10e0\u10d0\u10e4\u10d8\u10d8\u10e1 \u10d3\u10e0\u10dd\u10db\u10d3\u10d4\u10ea \u10e3\u10ea\u10d5\u10da\u10d4\u10da\u10d0\u10d3 \u10db\u10dd\u10d0\u10e6\u10ec\u10d8\u10d0. \u10d2\u10d0\u10dc\u10e1\u10d0\u10d9\u10e3\u10d7\u10e0\u10d4\u10d1\u10e3\u10da\u10d8 \u10de\u10dd\u10de\u10e3\u10da\u10d0\u10e0\u10dd\u10d1\u10d0 \u10db\u10d0\u10e1 1960-\u10d8\u10d0\u10dc \u10ec\u10da\u10d4\u10d1\u10e8\u10d8 \u10d2\u10d0\u10db\u10dd\u10e1\u10e3\u10da\u10db\u10d0 Letraset-\u10d8\u10e1 \u10ea\u10dc\u10dd\u10d1\u10d8\u10da\u10db\u10d0 \u10e2\u10e0\u10d0\u10e4\u10d0\u10e0\u10d4\u10e2\u10d4\u10d1\u10db\u10d0 \u10db\u10dd\u10e3\u10e2\u10d0\u10dc\u10d0, \u10e3\u10e4\u10e0\u10dd \u10db\u10dd\u10d2\u10d5\u10d8\u10d0\u10dc\u10d4\u10d1\u10d8\u10d7 \u10d9\u10d8 \u2014 Aldus PageMaker-\u10d8\u10e1 \u10e2\u10d8\u10de\u10d8\u10e1 \u10e1\u10d0\u10d2\u10d0\u10db\u10dd\u10db\u10ea\u10d4\u10db\u10da\u10dd \u10de\u10e0\u10dd\u10d2\u10e0\u10d0\u10db\u10d4\u10d1\u10db\u10d0, \u10e0\u10dd\u10db\u10da\u10d4\u10d1\u10e8\u10d8\u10ea Lorem Ipsum-\u10d8\u10e1 \u10e1\u10ee\u10d5\u10d0\u10d3\u10d0\u10e1\u10ee\u10d5\u10d0 \u10d5\u10d4\u10e0\u10e1\u10d8\u10d4\u10d1\u10d8 \u10d8\u10e7\u10dd \u10e9\u10d0\u10e8\u10d4\u10dc\u10d4\u10d1\u10e3\u10da\u10d8.",
             "parent_id": 2,
-            "fullname": "Ahmet Ay",
-            "email": "ahmetay@mail.com"
+            "post": 2,
+            "fullname": "Ahmet Ay"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "comment.comment",
+        "fields": {
+            "activation_key": "GqNwPxsWBf",
+            "is_approved": true,
+            "comment_type": 21,
+            "created_at": "2013-07-12 15:59:36",
+            "is_active": true,
+            "updated_at": null,
+            "email": "mustafa.kirimli@markafoni.com",
+            "content": "The reasons many men give for having anything to say about women having an abortion are mostly silent after conception. While many men shirk and squander their support responsibilities with billions lost in court fees, child welfare services, and neglected children, along with whiney anti-abortion advocates who wouldn't dream of adopting an unwanted child, or constantly demand their politicians defund child welfare programs, child education programs, child social well-being programs and psychiatric care....etc.",
+            "parent_id": 3,
+            "post": 1,
+            "fullname": "Mustafa K\u0131r\u0131ml\u0131"
         }
     },
     {
