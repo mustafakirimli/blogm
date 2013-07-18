@@ -14,7 +14,7 @@ class EmailChange(models.Model):
     # email change request status 
     # True: pending request
     # False: approved request
-    is_active = models.BooleanField(default=True)
+    is_confirmed = models.BooleanField(default=True)
 
     # email change request created time
     created_at = models.DateTimeField(auto_now_add=True)
@@ -24,7 +24,7 @@ class EmailChange(models.Model):
         """
         returns active -pending- email change requests for given user
         """
-        change = EmailChange.objects.filter(user=user, is_active=True)
+        change = EmailChange.objects.filter(user=user, is_confirmed=True)
         return change[0] if change else False
 
     @staticmethod
@@ -33,12 +33,12 @@ class EmailChange(models.Model):
         activation_key = User.objects.make_random_password()
 
         # set all the old requests to false for this user
-        EmailChange.objects.filter(user=user).update(is_active=False)
+        EmailChange.objects.filter(user=user).update(is_confirmed=False)
 
         # create request
         email_change = EmailChange.objects.create(user=user, 
                                                   email=email, 
-                                                  is_active=True, 
+                                                  is_confirmed=True, 
                                                   activation_key=activation_key)
         return email_change
 
@@ -51,11 +51,11 @@ class EmailChange(models.Model):
         self.user.save()
 
         # set status to false
-        self.is_active = False
+        self.is_confirmed = False
         self.save()
 
         # return status
-        return self.is_active
+        return self.is_confirmed
 
     class Meta:
         app_label = 'account'
