@@ -45,7 +45,6 @@ LOCALE_PATHS = (
 AUTH_PROFILE_MODULE = 'account.UserProfile'
 AUTHENTICATION_BACKENDS = ('account.backends.EmailAuthBackend',)
 AUTH_USER_EMAIL_UNIQUE = True
-LOGIN_URL = '/account/login/'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -190,8 +189,4 @@ EMAIL_PORT = 587
 # celery settings
 djcelery.setup_loader()
 BROKER_URL = 'amqp://guest:guest@localhost:5672/'
-CELERY_IMPORTS = ("tasks",
-                  "account.models.userprofile", 
-                  "account.models.emailchange",
-                  "post.models",
-                  "comment.models")
+CELERY_IMPORTS = ("tasks",)
