@@ -3,6 +3,7 @@ from django.contrib.sites.models import Site
 from django.core.mail import send_mail
 from django.template.loader import get_template 
 from django.template import Context
+from django.utils.translation import ugettext as _
 
 @task
 def send_account_activation_email(profile):
