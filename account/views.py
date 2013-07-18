@@ -106,8 +106,6 @@ def change_email(request):
         email = request.POST.get("email")
 
         if form.is_valid():
-            form.save()
-
             # create email change requests
             email_change = EmailChange.create_request(request.user, email)
 
