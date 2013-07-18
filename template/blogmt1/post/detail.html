@@ -31,57 +31,62 @@
   <!-- comment end //-->
 
   <!-- comment form start //-->
-  {% url add_comment as action%}
-  {% include "block/form.html" with action=action legend="Write Comment" submit="Send Comment" autofocus="on" %}
-  <hr>
+  <div class="comment_form {% if reply_form.errors %}hide{% endif %}">
+    {% url add_comment post.id as action%}
+    {% include "block/form.html" with form=comment_form action=action legend="Write Comment" submit="Send Comment" autofocus="on" %}
+  </div>
   <!-- comment form end //-->
+  <!-- reply form start //-->
+  <div class="reply_form {% if reply_form.errors %}show{% else %}hide{% endif %}">
+    (<small><a id="cancel_reply" href="#">{% trans "Cancel Reply Mode" %}</a></small>)
+    {% url add_reply post.id as action%}
+    {% include "block/form.html" with form=reply_form action=action legend="Write Reply" submit="Send Reply" autofocus="on" %}
+  </div>
+  <!-- reply form end //-->
+  <hr>
 {% endblock %}
 
 {% block js %}
 <script>
-  /* reply mode text for legend */
-  reply_mode_text = '{% trans "Write Comment Reply" %} '
-                   +'(<small><a id="cancel_reply" href="#">'
-                   +'{% trans "Cancel Reply Mode" %}</a></small>)'
-
   /* reply_id input */
-  reply_id_el = jQuery("#id_reply_id")
+  parent_id_el = jQuery(".reply_form #id_parent_id")
   
-  /* form legend */
-  legend = reply_id_el.closest("form").find("legend")
-
-  /* default legend text */
-  legend_default = legend.html()
-
-  /* if server returns form error, set reply mode text to legend */
-  if(reply_id_el.val() != "")
+  /* if server returns form error, set reply mode text to legend *
+  if(parent_id_el.val() != "")
     legend.html(reply_mode_text)
+  */
 
   jQuery("a.reply").click(function(e){
     /* don't act like a click action :) */
     e.preventDefault()
 
-    /* reply legend text to reply mode */
-    legend.html(reply_mode_text)
-
-    /* set reply_id input value with comment id */
+    /* set parent_id input value with comment id */
     var reply_id = jQuery(this).data("id")
-    reply_id_el.val(reply_id)
+    parent_id_el.val(reply_id)
+
+    /* show reply form */
+    jQuery(".reply_form").show()
+
+    /* hide comment form */
+    jQuery(".comment_form").hide()
 
     /* change location hash for form focus */
     location.hash = ""
-    location.hash = "form_{{ form|get_hash }}"
+    location.hash = "form_{{ reply_form|get_hash }}"
   })
 
-  legend.on("click", "#cancel_reply", function(e){
+  jQuery("#cancel_reply").click(function(e){
     /* don't act like a click action :) */
     e.preventDefault()
 
-    /* set legend text to default (comment mode) */
-    legend.html(legend_default)
-
     /* clear form reply_id input's value */
-    reply_id_el.val("")
+    parent_id_el.val("")
+
+    /* hide reply form */
+    jQuery(".reply_form").hide()
+
+    /* show comment form */
+    jQuery(".comment_form").show()
   })
 </script>
 {% endblock %} 

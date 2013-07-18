@@ -2,11 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext as _
-from celery import task
-from django.contrib.sites.models import Site
-from django.core.mail import send_mail
-from django.template.loader import get_template 
-from django.template import Context
 
 class UserProfile(models.Model):
     # user
@@ -23,7 +18,7 @@ class UserProfile(models.Model):
                               upload_to="upload/profile/", 
                               blank=True, 
                               null=True)
-    
+
     # gender
     GENDER_CHOICES = (
         ('M', _('Male')),
@@ -44,26 +39,6 @@ class UserProfile(models.Model):
         self.is_approved = True
         self.save()
         return self.is_approved
-
-    @task
-    def send_activation_email(self):
-        # get current site for url
-        site = Site.objects.get_current()
-        # send email with template
-        send_mail(
-            _('Thanks for signing up!'),
-            get_template('email/account/activate.html').render(
-                Context({
-                    'site': site,
-                    'user': self.user,
-                    'profile': self
-                })
-            ),
-            '',
-            [self.user.email],
-            fail_silently = True
-        )
-        return True
 
     class Meta:
         app_label = 'account'

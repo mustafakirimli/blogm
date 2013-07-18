@@ -26,7 +26,7 @@ urlpatterns = patterns('',
     url(r'^comment/', include('blogm.comment.urls')),
 
     # account app
-    url(r'^account/', include('blogm.account.urls')),
+    url(r'^accounts/', include('blogm.account.urls')),
 
     url(r'^wrong/', 'blogm.views.wrong', name='wrong'),
 

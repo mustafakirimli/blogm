@@ -137,3 +137,15 @@ body {
 .justify{
   text-align: justify;
 }
+
+ .reply_form{
+  display: none;
+}
+
+.show{
+  display: block;
+}
+
+.hide{
+  display: none;
+}

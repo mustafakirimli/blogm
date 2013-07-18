@@ -1,15 +1,7 @@
-import PIL
-import settings
-
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext as _
-from celery import task
-from PIL import Image
-from django.contrib.sites.models import Site
-from django.core.mail import send_mail
-from django.template.loader import get_template 
-from django.template import Context
 
 from comment.models import Comment
 from post.managers import PostManager
@@ -20,8 +12,10 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
     description = models.CharField(max_length=255)
-    image = models.ImageField(_("Post Image"), upload_to="upload/post/", blank=True, null=True)
-    activation_key =  models.CharField(max_length=30, null=True, blank=True)
+    image = models.ImageField(_("Post Image"), 
+                              upload_to="upload/post/", 
+                              blank=True, 
+                              null=True)
     is_active = models.BooleanField(default=True)
     is_approved = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -30,64 +24,35 @@ class Post(models.Model):
     objects = PostManager()
 
     def get_comments(self):
-        content_type = Comment.type_post()
-        post_type_id = content_type.id
+        """
+        Get all comment for this post
+        """
+        type = ContentType.objects.get_for_model(self)
         return Comment.objects.filter(is_active=True, 
                                      is_approved=True, 
-                                     comment_type=post_type_id,
-                                     parent_id=self.id
-                                ).order_by("id")
+                                     post=self,
+                                     comment_type=type
+                                     ).order_by("id")
 
-    def is_visible(self):
-        return self.is_active and self.is_approved
+    def get_replies(self):
+        """
+        Get this post's replies.
+        returns replies grouped by parent_id
+        """
+        type = ContentType.objects.get_for_model(Comment)
+        objects = Comment.objects.filter(is_active=True, 
+                                     is_approved=True, 
+                                     post=self,
+                                     comment_type=type
+                                     ).order_by("id")
+        
+        replies = {}
+        for r in objects:
+            if not r.parent_id in replies:
+                replies[r.parent_id] = []
+            replies[r.parent_id].append(r)
 
-    #TODO: tasks icinde olabilir
-    @task
-    def resize_post_image(self):
-        if not self.image:
-            return True
-
-        image_path = "%s/%s" %(settings.MEDIA_ROOT, self.image)
-
-        basewidth = 200
-        image = Image.open(image_path)
-        # ImageOps compatible mode
-        if image.mode not in ("L", "RGB"):
-            image = image.convert("RGB")
-
-        wpercent = (basewidth/float(image.size[0]))
-        hsize = int((float(image.size[1])*float(wpercent)))
-        image = image.resize((basewidth,hsize), PIL.Image.ANTIALIAS)
-        image.save(image_path)
-        return True
-
-    #TODO: tasks icinde olabilir
-    @task
-    def notify_admin(self):
-        site = Site.objects.get_current()
-        # send email with template
-        send_mail(
-            _('Please approve new post!'),
-            get_template('email/post/approve_post.html').render(
-                Context({
-                    'site': site,
-                    'user': self.user,
-                    'post': self
-                })
-            ),
-            '',
-            settings.ADMINS,
-            fail_silently = True
-        )
-        return True
-
-    def approve(self):
-        self.is_approved = True
-        self.save()
-        return self.is_approved
+        return replies
 
     class Meta:
         app_label = 'post'
-
-    def __unicode__(self):
-        return self.name

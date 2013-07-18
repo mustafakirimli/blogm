@@ -11,18 +11,8 @@ def md5_string(value):
 
 @register.filter(name='get_hash')
 def get_hash(value):
-    try:
-        return value.__hash__()
-    except Exception, e:
-        print e
-        return None
+    return value.__hash__()
 
-@register.filter(name='get_replies')
-def get_replies(value):
-    try:
-        comment = Comment.objects.get(id=value)
-        replies = comment.get_replies()
-        return replies
-    except Exception, e:
-        print e
-    return False
+@register.filter(name='get_dict_value')
+def get_dict_value(value, arg):
+	return arg[value] if value in arg else False

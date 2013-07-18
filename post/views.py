@@ -4,7 +4,7 @@ from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.models import User
 
-from comment.forms import CommentForm
+from comment.forms import CommentForm, ReplyForm
 from post.models import Post
 from post.forms import PostForm
 from comment.models import Comment
@@ -64,7 +64,7 @@ def edit_post(request, post_id):
         'form': form,
     })
 
-def detail(request, post_id, form=None):
+def detail(request, post_id, comment_form=None, reply_form=None):
     # get (active and approved) post or raise 404
     post = get_object_or_404(Post, 
                              pk=post_id, 
@@ -74,29 +74,20 @@ def detail(request, post_id, form=None):
     # get (active and approved) post comments
     comments = post.get_comments()
 
-    # new comment form
-    post_type = Comment.type_post()
-    initial = {"parent_id": post_id, "comment_type": post_type.id}
+    # get (active and approved) comment replies
+    replies = post.get_replies()
 
     # if form is not None, this method calling from comment.views.add_comment
-    if not form:
-        form = CommentForm(request.user, initial=initial)
+    if not comment_form:
+        comment_form = CommentForm(request.user)
+
+    if not reply_form:
+        reply_form = ReplyForm(request.user)
     
     return render(request, 'post/detail.html', {
         'post': post, 
-        'form': form, 
-        'comments': comments
+        'comment_form': comment_form, 
+        'reply_form': reply_form,
+        'comments': comments,
+        'replies': replies
     })
-
-def approve_post(request, activation_key):
-    try:
-        # get post with given activation key
-        p = get_object_or_404(Post, activation_key=activation_key)
-        # approve post
-        p.approve()
-        # redirect to homepage
-        messages.info(request, _("Post approved."))
-    except:
-        messages.info(request, _("Post approve problem!"))
-
-    return redirect("home")

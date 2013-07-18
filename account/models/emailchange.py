@@ -1,11 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from celery import task
-from django.contrib.sites.models import Site
-from django.core.mail import send_mail
-from django.template.loader import get_template 
-from django.template import Context
-from django.utils.translation import ugettext as _
 
 class EmailChange(models.Model):
     # user
@@ -62,28 +56,6 @@ class EmailChange(models.Model):
 
         # return status
         return self.is_active
-
-    @task
-    def send_activation_email(self):
-        """
-        send email change confirmation email to new address.
-        """
-        site = Site.objects.get_current()
-        # send email with template
-        send_mail(
-            _('Please confirm email change request!'),
-            get_template('email/account/email_activate.html').render(
-                Context({
-                    'site': site,
-                    'user': self.user,
-                    'change': self
-                })
-            ),
-            '',
-            [self.email],
-            fail_silently = True
-        )
-        return True
 
     class Meta:
         app_label = 'account'

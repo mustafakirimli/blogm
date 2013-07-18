@@ -18,8 +18,8 @@
   </div>
 </div>
 
-{% if comment.id|get_replies %}
-    {% for c in comment.id|get_replies %}
+{% if comment.id|get_dict_value:replies %}
+    {% for c in comment.id|get_dict_value:replies %}
         {% with comment=c template_name="block/comment.html" %}
             <div class="reply">{% include template_name %}</div>
         {% endwith %}

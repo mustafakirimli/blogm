@@ -1,20 +1,16 @@
 import settings
+
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
-from django.utils.translation import ugettext as _
-from celery import task
-from django.contrib.sites.models import Site
-from django.core.mail import send_mail
-from django.template.loader import get_template 
-from django.template import Context
 
 class Comment(models.Model):
+    post = models.ForeignKey('post.Post')
     limit = (models.Q(app_label='post', model='post') |                         
              models.Q(app_label='comment', model='comment'))
     comment_type = models.ForeignKey(ContentType, limit_choices_to=limit)
     parent_id = models.PositiveIntegerField()
-    content_object = generic.GenericForeignKey('comment_type', 'parent_id')
+    parent = generic.GenericForeignKey('comment_type', 'parent_id')
     fullname = models.CharField(max_length=100, null=True, blank=True)
     email = models.CharField(max_length=100, null=True, blank=True)
     content = models.TextField()
@@ -24,40 +20,10 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True, blank=True)
 
-    @staticmethod
-    def type_comment():
-        return ContentType.objects.get(app_label="comment", model="comment")
-
-    @staticmethod
-    def type_post():
-        return ContentType.objects.get(app_label="post", model="post")
-
-    def get_replies(self):
-        return Comment.objects.filter(is_active=True, 
-                                     is_approved=True, 
-                                     comment_type=self.type_comment().id,
-                                     parent_id=self.id
-                               ).order_by("id")
-
-    @task
-    def notify_user(self):
-        site = Site.objects.get_current()
-        # send email with template
-        send_mail(
-            _('Please approve email address for your comment!'),
-            get_template('email/comment/approve_comment.html').render(
-                Context({
-                    'site': site,
-                    'comment': self
-                })
-            ),
-            '',
-            [self.email,],
-            fail_silently = True
-        )
-        return True
-
     def approve(self):
+        """
+        Approve comment
+        """
         self.is_approved = True
         self.save()
         return self.is_approved
