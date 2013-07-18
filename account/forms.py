@@ -53,6 +53,7 @@ class RegisterForm(forms.Form):
 class UserForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
+        # set first_name and last_name as required field, in default not req.
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
 

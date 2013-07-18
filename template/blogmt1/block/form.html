@@ -7,34 +7,13 @@
       <a name="form_{{form|get_hash}}"></a>
       <legend class="">{% trans legend %}</legend>
     </div>
-    {# Include the hidden fields in the form #}
-    {% for hidden in form.hidden_fields %}
-       {{ hidden }}
-    {% endfor %}
 
-    {% if form.non_field_errors %}
-    <div class="alert alert-error">
-      {% for err in form.non_field_errors %}
-      <a class="close" data-dismiss="alert" href="#">×</a>{{ err }}
-      {% endfor %}
-    </div>  
-    {% endif %}
+      {% include "block/messages.html" %}
 
-    {% include "block/messages.html" %}
-
-    {% csrf_token %}
-
-    {% for field in form.visible_fields %}
-      <div class="control-group {% if field.errors %}error{% endif %}">
-        <label class="control-label" for="{{ field.auto_id }}">{{ field.label }}</label>
-        <div class="controls">
-            {{ field }}
-            {% for err in field.errors %}
-                <p class="help-block">{{ err }}</p>
-            {% endfor %}
-        </div>
-      </div>
-    {% endfor %}
+      {% include "block/form_fields.html" %}
+      {% if form2 %}
+        {% include "block/form_fields.html" with form=form2 %}
+      {% endif %}
 
     <div class="control-group">
       <!-- Button -->
@@ -44,9 +23,3 @@
     </div>
   </fieldset>
 </form>
-
-{% if autofocus and form.errors or messages %}
-  <script>
-    window.location.hash="form_{{form|get_hash}}";
-  </script>
-{% endif %}
