@@ -25,7 +25,7 @@ def create_post(request):
             messages.success(request, _("Post created succesfully."))
             return redirect("my_posts")
     else:
-        form = PostForm(request.user)
+        form = PostForm()
 
     return render(request, 'post/create_post.html', {
         'form': form,

@@ -3,7 +3,7 @@
 
 {% block content %}
   <div id="create_post">
-  {% url create_post as action%}
+  {% url create_post as action %}
   {% include "block/form.html" with action=action legend="Create Post" submit="Send Post" %}
   </div>
   <hr>  
