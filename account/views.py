@@ -56,6 +56,7 @@ def register_user(request):
         'form': form,
     })
 
+@user_passes_test(lambda u: u.is_anonymous())
 def activate_account(request, activation_key):
     # get user profile with given activation key
     p = get_object_or_404(UserProfile, activation_key=activation_key)
