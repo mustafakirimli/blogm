@@ -17,7 +17,7 @@ class Post(models.Model):
                               blank=True, 
                               null=True)
     is_active = models.BooleanField(default=True)
-    is_approved = models.BooleanField(default=False)
+    is_approved = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True,blank=True)
 

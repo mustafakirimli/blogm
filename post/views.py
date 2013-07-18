@@ -7,24 +7,20 @@ from django.contrib.auth.models import User
 from comment.forms import CommentForm, ReplyForm
 from post.models import Post
 from post.forms import PostForm
+from post.tasks import resize_post_image
 from comment.models import Comment
 
 @login_required
 def create_post(request):
     if request.method == 'POST':
-        form = PostForm(request.user, 
-                        request.POST, 
+        form = PostForm(request.POST, 
                         request.FILES)
         if form.is_valid():
             # save form, create post
             post = form.save()
 
             # add resize image task to celery
-            post.resize_post_image.delay(post)
-
-            # add notify admin task to celery
-            # post.notify_admin.delay(post)
-            post.approve()
+            resize_post_image.delay(post)
 
             messages.success(request, _("Post created succesfully."))
             return redirect("my_posts")
