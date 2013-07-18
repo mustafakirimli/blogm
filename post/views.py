@@ -16,6 +16,9 @@ def create_post(request):
         form = PostForm(request.POST, 
                         request.FILES)
         if form.is_valid():
+            # set user to form instance
+            form.instance.user = request.user
+
             # save form, create post
             post = form.save()
 
@@ -37,24 +40,23 @@ def edit_post(request, post_id):
                              user=request.user)
 
     if request.method == 'POST':
-        form = PostForm(request.user,
-                        request.POST, 
+        form = PostForm(request.POST, 
                         request.FILES, 
                         instance=post)
         if form.is_valid():
+            # set user to form instance
+            form.instance.user = request.user
+            
             # update post
             post = form.save()
 
             # add resize image task to celery
-            post.resize_post_image.delay(post)
+            resize_post_image.delay(post)
 
-            # add notify admin task to celery
-            post.notify_admin.delay(post)
-            
             messages.success(request, _("Post updated succesfully."))
             return redirect("my_posts")
     else:
-        form = PostForm(request.user, instance=post)
+        form = PostForm(instance=post)
 
     return render(request, 'post/edit_post.html', {
         'form': form,
