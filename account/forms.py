@@ -97,9 +97,6 @@ class EmailForm(forms.ModelForm):
             raise forms.ValidationError(_("Please type your current password"))
         return password
 
-    def save(self):
-        return self.instance
-
     class Meta:
         model = User
         fields = ('email','password')
