@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.core.cache import cache
 
 from post.models import Post
+from decorators import cache_on_auth
 
+@cache_on_auth(600)
 def home(request):
     """
     Homepage view getting latest 3 post and main post and rendering html
@@ -36,6 +38,7 @@ def home(request):
     	'main_post': main_post
     })
 
+@cache_on_auth(600)
 def wrong(request):
     """
     This method testing for 404 error page

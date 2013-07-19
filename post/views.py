@@ -9,6 +9,7 @@ from post.models import Post
 from post.forms import PostForm
 from post.tasks import resize_post_image
 from comment.models import Comment
+from decorators import cache_on_auth
 
 @login_required
 def create_post(request):
@@ -62,6 +63,7 @@ def edit_post(request, post_id):
         'form': form,
     })
 
+@cache_on_auth(600)
 def detail(request, post_id, comment_form=None, reply_form=None):
     # get (active and approved) post or raise 404
     post = get_object_or_404(Post, 
