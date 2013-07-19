@@ -17,6 +17,7 @@ urlpatterns = patterns("account.views",
     url(r'^activate-account/(?P<activation_key>.+)/$', 'activate_account', 
         name='activate_account'),
     url(r'^my-posts/$', 'my_posts', name='my_posts'),
+    url(r'^message/$', 'message', name='message'),
 )
 
 urlpatterns += patterns('django.contrib.auth.views',

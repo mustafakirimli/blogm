@@ -48,7 +48,7 @@ def register_user(request):
                                      "your inbox for activation email."))
 
             # Redirect to account home page
-            return redirect("home") 
+            return redirect("message") 
     else:
         form = RegisterForm()
        
@@ -149,3 +149,6 @@ def my_posts(request):
     return render(request, 'account/posts.html', {
         'posts': posts
     })
+
+def message(request):
+    return render(request, 'account/message.html')

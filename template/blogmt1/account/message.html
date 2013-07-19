@@ -1,0 +1,17 @@
+{% extends "base/page.html" %}
+{% load i18n %}
+
+{% block content %}
+
+{% include "block/messages.html" %}
+
+<p>{% trans "Redirection to the homepage..." %}</p>
+
+<hr>
+
+<script type="text/javascript">
+  setTimeout(function() {
+        window.location.href  = '{% url home %}'
+  }, 3000);
+</script>
+{% endblock %}

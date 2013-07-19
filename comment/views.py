@@ -8,6 +8,7 @@ from comment.models import Comment
 from comment.forms import CommentForm, ReplyForm
 from post.views import detail
 from post.models import Post
+from comment.tasks import send_email_validation
 
 def add_comment(request, post_id):
     """
@@ -28,7 +29,7 @@ def add_comment(request, post_id):
                 comment.email = request.user.email
                 comment.save()
             else:
-                comment.notify_user.delay(comment)
+                send_email_validation.delay(comment)
             messages.success(request, _("Comment created succesfully."))
             return redirect("post_detail", post_id=post_id)
         return detail(request, post_id, comment_form=form)
@@ -56,7 +57,7 @@ def add_reply(request, post_id):
                 reply.email = request.user.email
                 reply.save()
             else:
-                reply.notify_user.delay(reply)
+                send_email_validation.delay(reply)
             messages.success(request, _("Comment created succesfully."))
             return redirect("post_detail", post_id=post_id)
         return detail(request, post_id, reply_form=form)
@@ -76,4 +77,4 @@ def approve_comment(request, activation_key):
     # redirect to homepage
     messages.info(request, _("Comment approved."))
 
-    return redirect("home")
+    return redirect("message")
