@@ -31,6 +31,8 @@ def add_comment(request, post_id):
             else:
                 send_email_validation.delay(comment)
             messages.success(request, _("Comment created succesfully."))
+
+            # redirect to post detail page
             return redirect("post_detail", post_id=post_id)
         return detail(request, post_id, comment_form=form)
     else:

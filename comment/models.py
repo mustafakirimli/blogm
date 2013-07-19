@@ -3,6 +3,9 @@ import settings
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
+from django.core.urlresolvers import reverse
+
+from utils import url_cache_purge
 
 class Comment(models.Model):
     post = models.ForeignKey('post.Post')
@@ -26,4 +29,8 @@ class Comment(models.Model):
         """
         self.is_approved = True
         self.save()
+
+        # purge post cache
+        url_cache_purge(reverse("post_detail", args=[self.post.id]))
+        
         return self.is_approved

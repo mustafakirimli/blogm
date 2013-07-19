@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
 from comment.forms import CommentForm, ReplyForm
 from post.models import Post
@@ -10,6 +11,7 @@ from post.forms import PostForm
 from post.tasks import resize_post_image
 from comment.models import Comment
 from decorators import cache_on_auth
+from utils import url_cache_purge
 
 @login_required
 def create_post(request):
@@ -53,6 +55,9 @@ def edit_post(request, post_id):
 
             # add resize image task to celery
             resize_post_image.delay(post)
+
+            # purge post cache
+            url_cache_purge(reverse("post_detail", args=[post_id]))
 
             messages.success(request, _("Post updated succesfully."))
             return redirect("my_posts")
