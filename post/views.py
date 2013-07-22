@@ -37,6 +37,7 @@ def create_post(request):
         'form': form,
     })
 
+@login_required
 def edit_post(request, post_id):
     post = get_object_or_404(Post, 
                              pk=post_id,
