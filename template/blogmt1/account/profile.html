@@ -3,6 +3,6 @@
 
 {% block content %}
     {% url update_profile as action %}
-    {% include "block/form.html" with form=user_form form2=profile_form action=action legend="Update Profile" submit="Update Profile" %}
+    {% include "block/form.html" with form=user_form form2=profile_form action=action legend="Update Profile" submit="Update Profile" is_multipart="yes" %}
     <hr>
 {% endblock %}

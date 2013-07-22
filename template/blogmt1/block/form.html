@@ -1,7 +1,8 @@
 {% load i18n %}
 {% load app_tags %}
 
-<form class="form-horizontal" action="{{ action }}" method="post" {%if form.is_multipart%}enctype="multipart/form-data"{% endif %}>
+<form class="form-horizontal" action="{{ action }}" method="post" 
+      {% if form.is_multipart or is_multipart %}enctype="multipart/form-data"{% endif %}>
     <fieldset>
     <div id="legend">
       <a name="form_{{form|get_hash}}"></a>
