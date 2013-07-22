@@ -1,162 +1,109 @@
-#: account/forms.py:12
-msgid "E-mail"
-msgstr ""
-
-#: account/forms.py:13 account/forms.py:78
-msgid "Password"
-msgstr ""
-
-#: account/forms.py:15
-msgid "Password (Confirm)"
-msgstr ""
-
-#: account/forms.py:22 account/forms.py:29 account/forms.py:108
-#: account/forms.py:115
-msgid "Ensure this value has at most 30 characters"
-msgstr ""
-
-#: account/forms.py:36 account/forms.py:202
-msgid "Email address too long. Please enter maximum 75 characters."
-msgstr ""
-
-#: account/forms.py:39
-msgid "Email addresses already exists."
-msgstr ""
-
-#: account/forms.py:47
-msgid "The passwords are not the same"
-msgstr ""
-
-#: account/forms.py:73
-msgid "Username"
-msgstr ""
-
-#: account/forms.py:74
-msgid "Username can contain any letters or numbers, without spaces"
-msgstr ""
-
-#: account/forms.py:88
+#: account/backends.py:15 account/backends.py:17
 msgid "Invalid email/password"
 msgstr ""
 
-#: account/forms.py:156 account/forms.py:194
+#: account/backends.py:19
+msgid "Disabled account. Please contact blog admin"
+msgstr ""
+
+#: account/backends.py:21
+msgid "Not activated account! Please activate your account"
+msgstr ""
+
+#: account/forms.py:14
+msgid "E-mail"
+msgstr ""
+
+#: account/forms.py:15
+msgid "Password"
+msgstr ""
+
+#: account/forms.py:17
+msgid "Password (Confirm)"
+msgstr ""
+
+#: account/forms.py:24
+msgid "Email addresses already exists."
+msgstr ""
+
+#: account/forms.py:32
+msgid "The passwords are not the same"
+msgstr ""
+
+#: account/forms.py:77
 msgid "Current Password"
 msgstr ""
 
-#: account/forms.py:158
-msgid "New Password"
-msgstr ""
-
-#: account/forms.py:160
-msgid "New Password (again)"
-msgstr ""
-
-#: account/forms.py:165
-msgid "Please type your current password."
-msgstr ""
-
-#: account/forms.py:173
-msgid "The new passwords are not the same"
-msgstr ""
-
-#: account/forms.py:205
+#: account/forms.py:85
 msgid "Please enter a new email address"
 msgstr ""
 
-#: account/forms.py:218
+#: account/forms.py:98
 msgid "Please type your current password"
 msgstr ""
 
-#: account/views.py:46
+#: account/tasks.py:17
+msgid "Thanks for signing up!"
+msgstr ""
+
+#: account/tasks.py:39
+msgid "Please confirm email change request!"
+msgstr ""
+
+#: account/views.py:47
 msgid "Thanks for registering. Please check your inbox for activation email."
 msgstr ""
 
-#: account/views.py:65
+#: account/views.py:66
 msgid "Account activated."
 msgstr ""
 
-#: account/views.py:67
-msgid "Account activation problem!"
-msgstr ""
-
-#: account/views.py:99
+#: account/views.py:85
 msgid "Profile updated succesfully."
 msgstr ""
 
 #: account/views.py:115
-msgid "Password  updated succesfully."
-msgstr ""
-
-#: account/views.py:153
 msgid "Email change request created. Please check your email box"
 msgstr ""
 
-#: account/views.py:178
+#: account/views.py:138
 msgid "Your email address activated"
 msgstr ""
 
-#: account/models/emailchange.py:74
-msgid "Please confirm email change request!"
-msgstr ""
-
-#: account/models/userprofile.py:22
+#: account/models/userprofile.py:17
 msgid "Profile Pic"
 msgstr ""
 
-#: account/models/userprofile.py:29
+#: account/models/userprofile.py:24
 msgid "Male"
 msgstr ""
 
-#: account/models/userprofile.py:30
+#: account/models/userprofile.py:25
 msgid "Female"
 msgstr ""
 
-#: account/models/userprofile.py:54
-msgid "Thanks for signing up!"
-msgstr ""
-
-#: comment/forms.py:28 comment/forms.py:34
-msgid "Ensure this value has at most 100 characters"
-msgstr ""
-
-#: comment/models.py:47
+#: comment/tasks.py:16
 msgid "Please approve email address for your comment!"
 msgstr ""
 
-#: comment/views.py:20
+#: comment/views.py:33 comment/views.py:63
 msgid "Comment created succesfully."
 msgstr ""
 
-#: comment/views.py:31
+#: comment/views.py:80
 msgid "Comment approved."
 msgstr ""
 
-#: comment/views.py:33
-msgid "Comment approve problem!"
-msgstr ""
-
-#: post/models.py:20
+#: post/models.py:15
 msgid "Post Image"
 msgstr ""
 
-#: post/models.py:74
-msgid "Please approve new post!"
-msgstr ""
-
-#: post/views.py:29
+#: post/views.py:31
 msgid "Post created succesfully."
 msgstr ""
 
-#: post/views.py:58
+#: post/views.py:59
 msgid "Post updated succesfully."
-msgstr ""
-
-#: post/views.py:98
-msgid "Post approved."
-msgstr ""
-
-#: post/views.py:100
-msgid "Post approve problem!"
 msgstr ""
 
 #: template/blogmt1/404.html:5 template/blogmt1/404.html.py:14
@@ -203,11 +150,11 @@ msgid ""
 "      "
 msgstr ""
 
-#: template/blogmt1/home.html:13
+#: template/blogmt1/home.html:14
 msgid "Read More"
 msgstr ""
 
-#: template/blogmt1/home.html:24
+#: template/blogmt1/home.html:28
 msgid "View details"
 msgstr ""
 
@@ -241,6 +188,10 @@ msgstr ""
 
 #: template/blogmt1/account/index.html:32
 msgid "Email"
+msgstr ""
+
+#: template/blogmt1/account/message.html:8
+msgid "Redirection to the homepage..."
 msgstr ""
 
 #: template/blogmt1/account/posts.html:7
@@ -376,10 +327,14 @@ msgstr ""
 msgid "Approve Post"
 msgstr ""
 
-#: template/blogmt1/post/detail.html:43
-msgid "Write Comment Reply"
+#: template/blogmt1/post/detail.html:44
+msgid "Cancel Reply Mode"
 msgstr ""
 
-#: template/blogmt1/post/detail.html:45
-msgid "Cancel Reply Mode"
+#: template/blogmt1/registration/logged_out.html:7
+msgid "Logged out Succesfully"
+msgstr ""
+
+#: template/blogmt1/registration/password_change_done.html:7
+msgid "Your Password Updated Succesfully"
 msgstr ""
