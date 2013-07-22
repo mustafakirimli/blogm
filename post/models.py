@@ -37,22 +37,15 @@ class Post(models.Model):
     def get_replies(self):
         """
         Get this post's replies.
-        returns replies grouped by parent_id
         """
         type = ContentType.objects.get_for_model(Comment)
-        objects = Comment.objects.filter(is_active=True, 
+        return Comment.objects.filter(is_active=True, 
                                      is_approved=True, 
                                      post=self,
                                      comment_type=type
                                      ).order_by("id")
         
-        replies = {}
-        for r in objects:
-            if not r.parent_id in replies:
-                replies[r.parent_id] = []
-            replies[r.parent_id].append(r)
-
-        return replies
+        
 
     class Meta:
         app_label = 'post'

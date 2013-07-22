@@ -9,6 +9,7 @@ from comment.forms import CommentForm, ReplyForm
 from post.models import Post
 from post.forms import PostForm
 from post.tasks import resize_post_image
+from post.utils import sort_replies
 from comment.models import Comment
 from decorators import cache_on_auth
 
@@ -75,7 +76,7 @@ def detail(request, post_id, comment_form=None, reply_form=None):
     comments = post.get_comments()
 
     # get (active and approved) comment replies
-    replies = post.get_replies()
+    replies = sort_replies(replies = post.get_replies())
 
     # if form is not None, this method calling from comment.views.add_comment
     if not comment_form:
