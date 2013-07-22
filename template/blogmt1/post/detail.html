@@ -1,6 +1,7 @@
 {% extends "base/page.html" %}
 {% load i18n %}
 {% load app_tags %}
+{% load cache %}
 
 {% block title %}{{ post.title }}{% endblock %}
 
@@ -19,6 +20,7 @@
   <!-- post end //-->
   
   <!-- comment start //-->
+  {% cache 500 comment post.id %}
   <div class="comments">
   {% if comments %}
   <h4><i class="icon-comment"></i>  {{ comments.count }} Comment</h4>
@@ -28,6 +30,7 @@
     {% include "block/comment.html" %}
   {% endfor %}
   </div>
+  {% endcache %}
   <!-- comment end //-->
 
   <!-- comment form start //-->
