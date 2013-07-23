@@ -3,6 +3,9 @@ from django.conf import settings
 from django.core.cache import cache
 
 def get_template_cache_key(cache_name, identify=None):
+    """
+    Returns template cache key
+    """
     if identify is None:
         identify = hashlib.md5()
     else:
