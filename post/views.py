@@ -66,6 +66,7 @@ def edit_post(request, post_id):
     })
 
 
+@cache_on_auth(600)
 def detail(request, post_id, comment_form=None, reply_form=None):
     # get (active and approved) post or raise 404
     post = get_object_or_404(Post, 

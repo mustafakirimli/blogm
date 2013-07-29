@@ -91,5 +91,7 @@
     /* show comment form */
     jQuery(".comment_form").show()
   })
+
+  jQuery('input[name="csrfmiddlewaretoken"]').parent().load('{% url get_csrf %}');
 </script>
 {% endblock %} 
