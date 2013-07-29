@@ -4,6 +4,7 @@ from django.core.cache import cache
 from post.models import Post
 from decorators import cache_on_auth
 
+
 @cache_on_auth(600)
 def home(request):
     """

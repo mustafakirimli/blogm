@@ -15,10 +15,7 @@ def get_template_cache_key(cache_name, identify=None):
     
     return cache_key
 
-def purge_cache(key, key_prefix=None):
-    if key_prefix is None:
-        key_prefix = settings.CACHE_MIDDLEWARE_KEY_PREFIX
-
+def purge_cache(key, key_prefix=settings.CACHE_MIDDLEWARE_KEY_PREFIX):
     # set cache key prefix
     cache.key_prefix = key_prefix
 
