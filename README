@@ -1,5 +1,8 @@
 BLOGM
 
+# application screenshots
+https://github.com/mustafakirimli/blogm/wiki/Blog-Screenshots
+
 # create database
 python manage.py syncdb
 
