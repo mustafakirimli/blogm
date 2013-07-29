@@ -46,6 +46,12 @@ AUTH_PROFILE_MODULE = 'account.UserProfile'
 AUTHENTICATION_BACKENDS = ('account.backends.EmailAuthBackend',)
 AUTH_USER_EMAIL_UNIQUE = True
 
+# store session data on cache
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
+# store message frameworks data on session (cache)
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -179,12 +185,17 @@ LOGGING = {
     }
 }
 
+# email settings for gmail
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'name.lastname@markafoni.com'
+# EMAIL_HOST_PASSWORD = 'password'
+# EMAIL_PORT = 587
+
 # email settings
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'name.lastname@markafoni.com'
-EMAIL_HOST_PASSWORD = 'password'
-EMAIL_PORT = 587
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
 
 # celery settings
 djcelery.setup_loader()
