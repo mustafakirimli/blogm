@@ -42,6 +42,6 @@ def home(request):
 @cache_on_auth(600)
 def wrong(request):
     """
-    This method testing for 404 error page
+    This method testing for 500 error page
     """
     pass
