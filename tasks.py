@@ -1,7 +1,7 @@
-from blogm.utils import purge_url_cache, purge_cache
 from django.db.models.signals import pre_save, post_save
 from django.core.urlresolvers import reverse
 
+from blogm.utils import purge_url_cache, purge_cache
 from post.models import Post
 
 def purge_homepage_cache(sender, **kwargs):
