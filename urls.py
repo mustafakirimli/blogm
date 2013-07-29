@@ -30,6 +30,8 @@ urlpatterns = patterns('',
 
     url(r'^wrong/', 'blogm.views.wrong', name='wrong'),
 
+    url(r'^get-csrf/', 'blogm.views.get_csrf', name='get_csrf'),    
+
     # media requests
     url(r'^media/(?P<path>.*)$',
          "django.views.static.serve",
