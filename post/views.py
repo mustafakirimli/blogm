@@ -3,7 +3,6 @@ from django.contrib import messages
 from django.utils.translation import ugettext as _
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
 
 from comment.forms import CommentForm, ReplyForm
 from post.models import Post
@@ -65,6 +64,7 @@ def edit_post(request, post_id):
     return render(request, 'post/edit_post.html', {
         'form': form,
     })
+
 
 def detail(request, post_id, comment_form=None, reply_form=None):
     # get (active and approved) post or raise 404
