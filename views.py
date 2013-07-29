@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.core.cache import cache
 from django.core.context_processors import csrf
-from django.shortcuts import render_to_response
 
 from post.models import Post
 from decorators import cache_on_auth
@@ -49,7 +48,9 @@ def wrong(request):
     pass
 
 def get_csrf(request):
+    """
+    Create csrf token and render in a html file
+    """
     c = {}
     c.update(csrf(request))
-    # ... view code here
-    return render_to_response("csrf.html", c)
+    return render(request, 'csrf.html', c)
